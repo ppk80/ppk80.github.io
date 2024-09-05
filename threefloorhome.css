@@ -9,7 +9,7 @@ body {
 
 img {
     position: absolute;
-    width: 20%; /* Adjust image size as needed */
-    height: auto;
+    height: 20%; /* Adjust image size as needed */
+    width: auto;
     cursor: grab;
 }
