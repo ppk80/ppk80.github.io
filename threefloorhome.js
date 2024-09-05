@@ -1,71 +1,68 @@
 var dragItem = null;
 var offsetX, offsetY;
 
-document.addEventListener('mousedown', function(e) {
-    if (e.target.tagName === 'IMG') {
-        dragItem = e.target;
-        offsetX = e.clientX - dragItem.getBoundingClientRect().left;
-        offsetY = e.clientY - dragItem.getBoundingClientRect().top;
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
-    }
-});
+// Event listeners for mouse events
+document.addEventListener('mousedown', startDrag);
+document.addEventListener('mousemove', onMouseMove);
+document.addEventListener('mouseup', stopDrag);
 
-document.addEventListener('dragstart', function(e) {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault(); // Prevent default drag behavior
+// Event listeners for touch events
+document.addEventListener('touchstart', startDrag);
+document.addEventListener('touchmove', onTouchMove);
+document.addEventListener('touchend', stopDrag);
+
+function startDrag(e) {
+    const target = e.target.tagName === 'IMG' ? e.target : null;
+    if (target) {
+        dragItem = target;
+
+        // Get the initial offset
+        const rect = dragItem.getBoundingClientRect();
+        if (e.type === 'mousedown') {
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+        } else if (e.type === 'touchstart') {
+            offsetX = e.touches[0].clientX - rect.left;
+            offsetY = e.touches[0].clientY - rect.top;
+        }
     }
-});
+}
 
 function onMouseMove(e) {
     if (dragItem) {
-        let newX = e.clientX - offsetX;
-        let newY = e.clientY - offsetY;
+        const newX = e.clientX - offsetX;
+        const newY = e.clientY - offsetY;
 
-        // Constrain the image within the viewport
-        const rect = dragItem.getBoundingClientRect();
-        const minX = 0;
-        const minY = 0;
-        const maxX = window.innerWidth - rect.width;
-        const maxY = window.innerHeight - rect.height;
-
-        // Ensure the image stays within bounds
-        newX = Math.max(minX, Math.min(newX, maxX));
-        newY = Math.max(minY, Math.min(newY, maxY));
-
-        dragItem.style.left = newX + 'px';
-        dragItem.style.top = newY + 'px';
+        moveItem(newX, newY);
     }
 }
 
-function onMouseUp() {
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
+function onTouchMove(e) {
+    if (dragItem) {
+        e.preventDefault(); // Prevent scrolling
+        const newX = e.touches[0].clientX - offsetX;
+        const newY = e.touches[0].clientY - offsetY;
+
+        moveItem(newX, newY);
+    }
+}
+
+function moveItem(newX, newY) {
+    const viewfinderRect = document.getElementById('viewfinder').getBoundingClientRect();
+    const rect = dragItem.getBoundingClientRect();
+
+    const minX = viewfinderRect.left;
+    const minY = viewfinderRect.top;
+    const maxX = viewfinderRect.right - rect.width;
+    const maxY = viewfinderRect.bottom - rect.height;
+
+    const constrainedX = Math.max(minX, Math.min(newX, maxX));
+    const constrainedY = Math.max(minY, Math.min(newY, maxY));
+
+    dragItem.style.left = constrainedX + 'px';
+    dragItem.style.top = constrainedY + 'px';
+}
+
+function stopDrag() {
     dragItem = null;
 }
-
-// Function to position images based on percentages
-function positionImage(img, xPercent, yPercent) {
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const imgWidth = img.offsetWidth;
-    const imgHeight = img.offsetHeight;
-
-    // Calculate position based on percentages
-    const posX = (screenWidth * xPercent / 100) - (imgWidth / 2);
-    const posY = (screenHeight * yPercent / 100) - (imgHeight / 2);
-
-    img.style.left = `${posX}px`;
-    img.style.top = `${posY}px`;
-}
-
-// Initialize images with desired positions
-const img1 = document.getElementById('img1');
-const img2 = document.getElementById('img2');
-const img3 = document.getElementById('img3');
-const img4 = document.getElementById('img4');
-
-positionImage(img1, 50, 25);
-positionImage(img2, 50, 50);
-positionImage(img3, 50, 75); 
-
