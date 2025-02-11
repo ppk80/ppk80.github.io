@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOVE-LETTER-FOR-YOU.TXT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Noto Sans", sans-serif;
+            background-color: cyan;
+            color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .poetry-container {
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-transform: lowercase;
+        }
+
+        .poem {
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+
+        .stanza {
+            margin: 1.5em 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="poetry-container">
+        <h1>LOVE-LETTER-FOR-YOU.TXT</h1>
+        <div class="poem">
+            <p class="stanza">
+            Why? They are the only ones <br>
+            that can say these? Are those <br>
+            who have can are <br>
+            the only ones that can <br>
+            speak from one machine<br>
+            to another<br>
+            from far away how many people<br>
+            are in this world is waiting<br>
+            for sleeping eating<br>
+            fucking opening and closing<br>
+            the light at night<br>
+            like them and like<br>
+            them deserve the world<br>
+            Do you know what<br>
+            is right? I know you do.<br>
+            Those people paying for<br>
+            eat all you can all day<br>
+            and they will not miss<br>
+            what they lose. they don't<br>
+            even notice. We cannot even<br>
+            dial-up. Ask me again<br>
+            if who are the burglars.
+            </p>
+        </div>
+    </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const poemElement = document.querySelector(".stanza");
+    let words = poemElement.innerHTML.split(/(\s+|<br>)/);
+    let firstReplacementDone = false;
+    
+    function replaceWord() {
+        if (!firstReplacementDone) {
+            // Find "these?" and replace it first
+            const index = words.findIndex(word => word.includes("these?"));
+            if (index !== -1) {
+                words[index] = "ILOVEYOU";
+                firstReplacementDone = true;
+            }
+        } else {
+            // Pick a random index to replace
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * words.length);
+            } while (words[randomIndex] === "ILOVEYOU" || words[randomIndex].trim() === "");
+            
+            words[randomIndex] = "ILOVEYOU";
+        }
+        
+        // Update the HTML
+        poemElement.innerHTML = words.join("");
+    }
+    
+    // Start replacing words every 3 seconds
+    setInterval(replaceWord, 3000);
+});
+
+    </script>
+</body>
+</html>
