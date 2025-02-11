@@ -76,8 +76,7 @@
         </div>
     </div>
 
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
+    <script>document.addEventListener("DOMContentLoaded", function () {
     const poemElement = document.querySelector(".stanza");
     let words = poemElement.innerHTML.split(/(\s+|<br>)/);
     let firstReplacementDone = false;
@@ -93,36 +92,35 @@ document.addEventListener("DOMContentLoaded", function () {
                     firstReplacementDone = true;
                 }
             } else {
-                // Pick a random index to replace
-                let remainingWords = words.filter(word => word.trim() !== "ILOVEYOU" && word.trim() !== "");
-                if (remainingWords.length === 0) {
+                // Pick a random index to replace, excluding <br> tags
+                let validIndexes = words.map((word, i) => word.trim() !== "ILOVEYOU" && word.trim() !== "" && word !== "<br>" ? i : -1).filter(i => i !== -1);
+                
+                if (validIndexes.length === 0) {
                     allWordsReplaced = true;
                 } else {
-                    let randomIndex;
-                    do {
-                        randomIndex = Math.floor(Math.random() * words.length);
-                    } while (words[randomIndex] === "ILOVEYOU" || words[randomIndex].trim() === "");
-                    
+                    let randomIndex = validIndexes[Math.floor(Math.random() * validIndexes.length)];
                     words[randomIndex] = "ILOVEYOU";
                 }
             }
         } else {
-            // Start replacing letters within words
-            let randomIndex = Math.floor(Math.random() * words.length);
-            if (words[randomIndex].trim() !== "") {
+            // Start replacing letters within words, excluding <br> tags
+            let validIndexes = words.map((word, i) => word.trim() !== "" && word !== "<br>" ? i : -1).filter(i => i !== -1);
+            if (validIndexes.length > 0) {
+                let randomIndex = validIndexes[Math.floor(Math.random() * validIndexes.length)];
                 let word = words[randomIndex];
                 let insertPosition = Math.floor(Math.random() * (word.length + 1));
                 words[randomIndex] = word.slice(0, insertPosition) + "ILOVEYOU" + word.slice(insertPosition);
             }
         }
         
-        // Update the HTML
+        // Update the HTML while preserving <br> tags
         poemElement.innerHTML = words.join("");
     }
     
     // Start replacing words every 3 seconds
     setInterval(replaceWord, 3000);
 });
+
 
 
     </script>
