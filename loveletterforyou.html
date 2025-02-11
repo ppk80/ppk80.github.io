@@ -81,23 +81,39 @@ document.addEventListener("DOMContentLoaded", function () {
     const poemElement = document.querySelector(".stanza");
     let words = poemElement.innerHTML.split(/(\s+|<br>)/);
     let firstReplacementDone = false;
+    let allWordsReplaced = false;
     
     function replaceWord() {
-        if (!firstReplacementDone) {
-            // Find "these?" and replace it first
-            const index = words.findIndex(word => word.includes("these?"));
-            if (index !== -1) {
-                words[index] = "ILOVEYOU";
-                firstReplacementDone = true;
+        if (!allWordsReplaced) {
+            if (!firstReplacementDone) {
+                // Find "these?" and replace it first
+                const index = words.findIndex(word => word.includes("these?"));
+                if (index !== -1) {
+                    words[index] = "ILOVEYOU";
+                    firstReplacementDone = true;
+                }
+            } else {
+                // Pick a random index to replace
+                let remainingWords = words.filter(word => word.trim() !== "ILOVEYOU" && word.trim() !== "");
+                if (remainingWords.length === 0) {
+                    allWordsReplaced = true;
+                } else {
+                    let randomIndex;
+                    do {
+                        randomIndex = Math.floor(Math.random() * words.length);
+                    } while (words[randomIndex] === "ILOVEYOU" || words[randomIndex].trim() === "");
+                    
+                    words[randomIndex] = "ILOVEYOU";
+                }
             }
         } else {
-            // Pick a random index to replace
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * words.length);
-            } while (words[randomIndex] === "ILOVEYOU" || words[randomIndex].trim() === "");
-            
-            words[randomIndex] = "ILOVEYOU";
+            // Start replacing letters within words
+            let randomIndex = Math.floor(Math.random() * words.length);
+            if (words[randomIndex].trim() !== "") {
+                let word = words[randomIndex];
+                let insertPosition = Math.floor(Math.random() * (word.length + 1));
+                words[randomIndex] = word.slice(0, insertPosition) + "ILOVEYOU" + word.slice(insertPosition);
+            }
         }
         
         // Update the HTML
@@ -107,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Start replacing words every 3 seconds
     setInterval(replaceWord, 3000);
 });
+
 
     </script>
 </body>
