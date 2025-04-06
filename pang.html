@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Island Terrain Generator</title>
+    <title>pang</title>
     <style>
         body {
-            background-color: #000;
-            color: #fff;
-            font-family: monospace;
-            font-size: 16px;
-            line-height: 1;
             margin: 0;
             padding: 0;
             overflow: hidden;
+            font-family: monospace;
+            background: #c3d4de;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         #terminal {
+            font-size: 30px;
+            line-height: 1;
+            letter-spacing: 3px;
+            text-align: center;
             white-space: pre;
-            letter-spacing: 2px;
-            position: absolute;
-            top: 0;
-            left: 0;
+			background-image: linear-gradient(#e9f0f5, #f5eae4);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -26,176 +31,105 @@
     <div id="terminal"></div>
 
     <script>
-        // Configuration
-        const WIDTH = 80;
-        const HEIGHT = 30;
-        const SCROLL_SPEED = 1;
-        const FRAME_RATE = 15;
+        // Fixed 30x30 grid
+        const COLS = 30;
+        const ROWS = 30;
+        const FRAME_RATE = 105;
+        const SCROLL_SPEED = 0.1;
         
-        // Enhanced terrain types for island/water focus
+        // Pastel terrain types
         const TERRAIN_TYPES = [
-            { name: 'deep_water', char: '≈', color: '#000080', weight: 0.3, height: -2 },
-            { name: 'shallow_water', char: '~', color: '#1E90FF', weight: 0.2, height: -1 },
-            { name: 'sand', char: '░', color: '#F0E68C', weight: 0.1, height: 0 },
-            { name: 'grass', char: '▓', color: '#32CD32', weight: 0.15, height: 1 },
-            { name: 'forest', char: '♠', color: '#006400', weight: 0.15, height: 2 },
-            { name: 'mountain', char: '▲', color: '#808080', weight: 0.05, height: 3 },
-            { name: 'snow', char: '❄', color: '#FFFFFF', weight: 0.05, height: 4 }
+            { name: 'water', chars: ['~'], color: '#a8d8ea', weight: 0.4, height: -1 },
+            { name: 'sand', chars: ['.'], color: '#b5ab88', weight: 0.1, height: 0 },
+            { name: 'grass', chars: ['*'], color: '#79ab87', weight: 0.3, height: 1 },
+            { name: 'forest', chars: ['♠'], color: '#668256', weight: 0.15, height: 2 },
+            { name: 'mountain', chars: ['^'], color: '#ccb4b4', weight: 0.05, height: 3 }
         ];
 
-        class IslandTerrainGenerator {
-            constructor(width, height) {
-                this.width = width;
-                this.height = height;
-                this.grid = [];
-                this.currentRow = this.generateInitialRow();
-                this.scrollOffset = 0;
-                this.landBias = 0.5; // Start with neutral bias
-                this.biomeCenter = Math.floor(width / 2);
-                this.riverPosition = Math.floor(width * 0.3);
-                this.riverWidth = 3;
-                
-                // Initialize grid
-                for (let y = 0; y < height; y++) {
-                    this.grid.push(this.generateNextRow());
-                }
-            }
-            
-            generateInitialRow() {
-                return Array.from({length: this.width}, () => 
-                    this.weightedRandomTerrain(TERRAIN_TYPES)
+        class ScrollingTerrain {
+            constructor() {
+                this.grid = Array(ROWS).fill().map(() => 
+                    Array(COLS).fill().map(() => this.randomTerrain())
                 );
+                this.scrollOffset = 0;
+                this.clusterStrength = 0.7;
             }
             
-            weightedRandomTerrain(options) {
-                const totalWeight = options.reduce((sum, t) => sum + t.weight, 0);
+            randomTerrain() {
+                const totalWeight = TERRAIN_TYPES.reduce((sum, t) => sum + t.weight, 0);
                 let random = Math.random() * totalWeight;
                 let weightSum = 0;
                 
-                for (const option of options) {
-                    weightSum += option.weight;
-                    if (random <= weightSum) return option;
+                for (const terrain of TERRAIN_TYPES) {
+                    weightSum += terrain.weight;
+                    if (random <= weightSum) return terrain;
                 }
+                return TERRAIN_TYPES[0];
+            }
+            
+            update() {
+                this.scrollOffset += SCROLL_SPEED;
                 
-                return options[0];
+                // When we've scrolled one full row
+                if (this.scrollOffset >= 1) {
+                    this.scrollOffset = 0;
+                    this.grid.shift(); // Remove top row
+                    this.grid.push(this.generateNextRow()); // Add new bottom row
+                }
             }
             
             generateNextRow() {
-                // Slowly drift the land bias and river position
-                this.landBias += (Math.random() - 0.5) * 0.05;
-                this.landBias = Math.max(0.2, Math.min(0.8, this.landBias));
-                
-                this.biomeCenter += (Math.random() - 0.5) * 2;
-                this.biomeCenter = Math.max(10, Math.min(this.width - 10, this.biomeCenter));
-                
-                this.riverPosition += (Math.random() - 0.5) * 0.5;
-                this.riverPosition = Math.max(5, Math.min(this.width - 5, this.riverPosition));
-                
                 const newRow = [];
+                const lastRow = this.grid[this.grid.length-1];
                 
-                for (let x = 0; x < this.width; x++) {
-                    // Calculate distance from biome center
-                    const distanceFromCenter = Math.abs(x - this.biomeCenter);
-                    const normalizedDistance = distanceFromCenter / (this.width / 2);
+                for (let x = 0; x < COLS; x++) {
+                    // Get neighbors for clustering
+                    const left = newRow[x-1] || lastRow[x];
+                    const above = lastRow[x];
                     
-                    // Calculate distance from river
-                    const distanceFromRiver = Math.abs(x - this.riverPosition);
-                    const isRiver = distanceFromRiver < this.riverWidth;
-                    
-                    // Get neighbors for cohesion
-                    const left = this.currentRow[x-1] || this.currentRow[x];
-                    const right = this.currentRow[x+1] || this.currentRow[x];
-                    const avgHeight = (left.height + this.currentRow[x].height + right.height) / 3;
-                    
-                    // Create adjusted weights based on multiple factors
-                    let weights = TERRAIN_TYPES.map(t => {
-                        let weight = t.weight;
-                        
-                        // Apply land/water bias
-                        if (t.height >= 0) weight *= this.landBias;
-                        else weight *= (1 - this.landBias);
-                        
-                        // Apply biome center effect (more land near center)
-                        if (t.height >= 0) weight *= (1 - normalizedDistance * 0.7);
-                        
-                        // River effect
-                        if (isRiver) {
-                            if (t.name.includes('water')) weight *= 3;
-                            else weight *= 0.3;
-                        }
-                        
-                        // Height cohesion
-                        if (Math.abs(t.height - avgHeight) > 1.5) weight *= 0.3;
-                        
-                        return weight;
-                    });
-                    
-                    // Ensure we don't have zero weights
-                    const minWeight = 0.001;
-                    weights = weights.map(w => Math.max(w, minWeight));
-                    
-                    // Create temporary terrain types with adjusted weights
-                    const adjustedTypes = TERRAIN_TYPES.map((t, i) => 
-                        ({...t, weight: weights[i]})
-                    );
-                    
-                    newRow.push(this.weightedRandomTerrain(adjustedTypes));
+                    // Combine influences
+                    if (Math.random() < this.clusterStrength) {
+                        newRow.push(Math.random() < 0.6 ? left : above);
+                    } else {
+                        newRow.push(this.randomTerrain());
+                    }
                 }
                 
-                this.currentRow = newRow;
                 return newRow;
             }
             
-            scroll() {
-                this.scrollOffset += SCROLL_SPEED;
-                
-                if (this.scrollOffset >= 1) {
-                    this.scrollOffset = 0;
-                    this.grid.shift();
-                    this.grid.push(this.generateNextRow());
-                }
-            }
-            
-            render(container) {
+            render() {
                 let output = '';
                 
-                for (let y = 0; y < this.height; y++) {
-                    for (let x = 0; x < this.width; x++) {
-                        const terrain = this.grid[y][x];
-                        output += `<span style="color:${terrain.color}">${terrain.char}</span>`;
+                for (let y = 0; y < ROWS; y++) {
+                    // Calculate vertical position with scroll offset
+                    const renderY = y - this.scrollOffset;
+                    
+                    // Only render visible rows
+                    if (renderY >= -1 && renderY < ROWS) {
+                        for (let x = 0; x < COLS; x++) {
+                            const terrain = this.grid[y][x];
+                            output += `<span style="color:${terrain.color}">${terrain.chars[0]}</span>`;
+                        }
+                        output += '\n';
                     }
-                    output += '\n';
                 }
                 
-                container.innerHTML = output;
+                document.getElementById('terminal').innerHTML = output;
             }
         }
 
         // Initialize and run
-        const terminal = document.getElementById('terminal');
-        const generator = new IslandTerrainGenerator(WIDTH, HEIGHT);
+        const terrain = new ScrollingTerrain();
         
         function gameLoop() {
-            generator.scroll();
-            generator.render(terminal);
-            setTimeout(gameLoop, 1000 / FRAME_RATE);
+            terrain.update();
+            terrain.render();
+            requestAnimationFrame(gameLoop);
         }
         
+        // Start the animation
         gameLoop();
-        
-        // Handle window resize
-        function resize() {
-            const cols = Math.floor(window.innerWidth / 12);
-            const rows = Math.floor(window.innerHeight / 18);
-            
-            terminal.style.fontSize = `${Math.min(
-                window.innerWidth / cols * 1.5, 
-                window.innerHeight / rows * 1.5
-            )}px`;
-        }
-        
-        window.addEventListener('resize', resize);
-        resize();
     </script>
 </body>
 </html>
