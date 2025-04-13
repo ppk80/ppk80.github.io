@@ -1,178 +1,284 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Oracles</title>
-  <style>
-    body {
-      font-family: 'Georgia', serif;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #f8f5f0;
-      color: #333;
-      line-height: 1.6;
-    }
-    h1 {
-      text-align: center;
-      color: #5a3921;
-      border-bottom: 1px solid #d4c9b8;
-      padding-bottom: 10px;
-    }
-    .controls {
-      background: #fff9ee;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
-    }
-    .source-option {
-      margin: 10px 0;
-      padding: 8px 12px;
-      background: #f0e6d2;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-    }
-    button {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #8b7355;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-      margin-top: 20px;
-    }
-    button:hover {
-      background: #6b5a45;
-    }
-    #output {
-      min-height: 120px;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      font-size: 18px;
-      border-left: 4px solid #8b7355;
-    }
-    .source-name {
-      font-weight: bold;
-      margin-left: 8px;
-      color: #5a3921;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threefold Oracle</title>
+    <style>
+        :root {
+            --blood: #5c2e2e;
+            --bone: #e8e0d0;
+            --midnight: #1a1a1a;
+            --moss: #3a5c40;
+            --tarnished: #b38b6d;
+        }
+        body {
+            background-color: var(--midnight);
+            color: var(--bone);
+            font-family: 'EB Garamond', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(92, 46, 46, 0.1) 0%, transparent 20%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23b38b6d" opacity="0.05" d="M30,50 Q50,30 70,50 T90,50 T70,50 T50,70 T30,50 Z"/></svg>');
+        }
+        .container {
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 1px solid var(--tarnished);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            position: relative;
+            background: rgba(26, 26, 26, 0.9);
+        }
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blood), var(--tarnished), var(--moss));
+        }
+        h1 {
+            font-family: 'UnifrakturMaguntia', cursive;
+            color: var(--tarnished);
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+        .source-controls {
+            background: rgba(58, 92, 64, 0.2);
+            padding: 1.5rem;
+            border-left: 3px solid var(--blood);
+            margin-bottom: 2rem;
+        }
+        .source-option {
+            display: flex;
+            align-items: center;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        .source-option input {
+            margin-right: 10px;
+            accent-color: var(--blood);
+        }
+        .source-name {
+            font-variant: small-caps;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+        }
+        #dreamlandfill + .source-name {
+            color: #8a9bb4;
+        }
+        #orchard + .source-name {
+            color: #d4a373;
+        }
+        #song + .source-name {
+            color: #c9a38d;
+        }
+        button {
+            background: var(--blood);
+            color: var(--bone);
+            border: none;
+            padding: 12px 25px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            margin: 1.5rem 0;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        button:hover {
+            background: #6d3737;
+        }
+        button::after {
+            content: "↯";
+            position: absolute;
+            right: 15px;
+            opacity: 0.5;
+        }
+        #output {
+            min-height: 200px;
+            padding: 2rem;
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid var(--tarnished);
+            font-size: 1.2rem;
+            position: relative;
+            line-height: 1.8;
+        }
+        #output::before {
+            content: "“";
+            font-size: 5rem;
+            position: absolute;
+            top: 0;
+            left: 10px;
+            color: rgba(179, 139, 109, 0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+        #output::after {
+            content: "”";
+            font-size: 5rem;
+            position: absolute;
+            bottom: -40px;
+            right: 10px;
+            color: rgba(179, 139, 109, 0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+        .source-attribution {
+            display: block;
+            margin-top: 1rem;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--tarnished);
+            text-align: right;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+                margin: 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Poetry Mixer</h1>
-  
-  <div class="controls">
-    <h3>Select Sources:</h3>
-    <label class="source-option">
-      <input type="checkbox" class="source-toggle" data-source="dreamlandfill" checked>
-      <span class="source-name">Dreamlandfill</span>
-    </label>
-    <label class="source-option">
-      <input type="checkbox" class="source-toggle" data-source="orchard" checked>
-      <span class="source-name">Orchard</span>
-    </label>
-    <label class="source-option">
-      <input type="checkbox" class="source-toggle" data-source="song" checked>
-      <span class="source-name">Song</span>
-    </label>
-    
-    <button id="generateBtn">Generate Random Line</button>
-  </div>
-  
-  <div id="output">Select sources and click the button above</div>
-
-  <script>
-    // Configuration - matches your file names exactly
-    const SOURCES = {
-      dreamlandfill: 'dreamlandfill.txt',
-      orchard: 'orchard.txt',
-      song: 'song.txt'
-    };
-
-    // Store loaded lines
-    const loadedLines = {
-      dreamlandfill: [],
-      orchard: [],
-      song: []
-    };
-
-    // Track active sources (start with all enabled)
-    let activeSources = new Set(Object.keys(SOURCES));
-
-    // DOM Elements
-    const sourceToggles = document.querySelectorAll('.source-toggle');
-    const generateBtn = document.getElementById('generateBtn');
-    const outputEl = document.getElementById('output');
-
-    // Load all text files
-    async function loadAllSources() {
-      try {
-        outputEl.textContent = "Loading poems...";
+    <div class="container">
+        <h1>Threefold Oracle</h1>
         
-        const loadPromises = Object.entries(SOURCES).map(async ([sourceName, fileName]) => {
-          const response = await fetch(fileName);
-          if (!response.ok) throw new Error(`Failed to load ${fileName}`);
-          const text = await response.text();
-          loadedLines[sourceName] = text.split('\n')
-            .map(line => line.trim())
-            .filter(line => line.length > 0);
+        <div class="source-controls">
+            <h3 style="color: var(--tarnished); margin-top: 0;">Invoke Sources:</h3>
+            <label class="source-option">
+                <input type="checkbox" id="dreamlandfill" class="source-toggle" data-source="dreamlandfill" checked>
+                <span class="source-name">Dreamlandfill</span>
+            </label>
+            <label class="source-option">
+                <input type="checkbox" id="orchard" class="source-toggle" data-source="orchard" checked>
+                <span class="source-name">Orchard</span>
+            </label>
+            <label class="source-option">
+                <input type="checkbox" id="song" class="source-toggle" data-source="song" checked>
+                <span class="source-name">Song</span>
+            </label>
+        </div>
+        
+        <button id="generateBtn">Draw the Thread</button>
+        
+        <div id="output">
+            <em>Select your sources and invoke the oracle...</em>
+        </div>
+    </div>
+
+    <script>
+        // Oracle Configuration
+        const ORACLE_SOURCES = {
+            dreamlandfill: 'dreamlandfill.txt',
+            orchard: 'orchard.txt',
+            song: 'song.txt'
+        };
+
+        // Sacred Vessels
+        const loadedVerses = {
+            dreamlandfill: [],
+            orchard: [],
+            song: []
+        };
+
+        // Active Revelations
+        let activeSources = new Set(Object.keys(ORACLE_SOURCES));
+
+        // Elements of Divination
+        const sourceToggles = document.querySelectorAll('.source-toggle');
+        const generateBtn = document.getElementById('generateBtn');
+        const outputEl = document.getElementById('output');
+
+        // Load the Sacred Texts
+        async function loadProphecies() {
+            try {
+                outputEl.innerHTML = "<em>Reading the signs...</em>";
+                
+                const loadingRites = Object.entries(ORACLE_SOURCES).map(async ([sourceName, fileName]) => {
+                    const response = await fetch(fileName);
+                    if (!response.ok) throw new Error(`The ${sourceName} refused to open`);
+                    const rawText = await response.text();
+                    loadedVerses[sourceName] = rawText.split('\n')
+                        .map(line => line.trim())
+                        .filter(line => line.length > 0);
+                });
+
+                await Promise.all(loadingRites);
+                outputEl.innerHTML = "<em>The way is prepared. Draw the Thread.</em>";
+                
+            } catch (error) {
+                console.error('Oracle Error:', error);
+                outputEl.innerHTML = `<em>Divination failed:</em> ${error.message}`;
+            }
+        }
+
+        // Invoke the Oracle
+        function invokeOracle() {
+            // Weave the selected threads
+            const allProphecies = [];
+            activeSources.forEach(source => {
+                allProphecies.push(...loadedVerses[source]);
+            });
+
+            if (allProphecies.length === 0) {
+                outputEl.innerHTML = "<em>No sources chosen. The oracle remains silent.</em>";
+                return;
+            }
+
+            // Cast the lots
+            const chosenIndex = Math.floor(Math.random() * allProphecies.length);
+            const prophecy = allProphecies[chosenIndex];
+            
+            // Reveal the source
+            const sourceName = Object.keys(ORACLE_SOURCES).find(key => 
+                loadedVerses[key].includes(prophecy)
+            );
+            
+            // Display the revelation
+            outputEl.innerHTML = `"${prophecy}"<span class="source-attribution">— ${formatSourceName(sourceName)}</span>`;
+        }
+
+        // Format source names for display
+        function formatSourceName(source) {
+            const names = {
+                dreamlandfill: "The Cards",
+                orchard: "The Fragments",
+                song: "The Myth"
+            };
+            return names[source] || source;
+        }
+
+        // Bind the Selections
+        sourceToggles.forEach(toggle => {
+            toggle.addEventListener('change', (e) => {
+                const source = e.target.dataset.source;
+                if (e.target.checked) {
+                    activeSources.add(source);
+                } else {
+                    activeSources.delete(source);
+                }
+            });
         });
 
-        await Promise.all(loadPromises);
-        outputEl.textContent = "Ready! Select sources and click the button.";
-        
-      } catch (error) {
-        console.error('Error loading poems:', error);
-        outputEl.textContent = `Error loading poems: ${error.message}`;
-      }
-    }
+        // Bind the Invocation
+        generateBtn.addEventListener('click', invokeOracle);
 
-    // Generate random line from active sources
-    function generateRandomLine() {
-      // Combine lines from active sources
-      const allLines = [];
-      activeSources.forEach(source => {
-        allLines.push(...loadedLines[source]);
-      });
-
-      if (allLines.length === 0) {
-        outputEl.textContent = 'Please select at least one source!';
-        return;
-      }
-
-      const randomIndex = Math.floor(Math.random() * allLines.length);
-      const randomLine = allLines[randomIndex];
-      
-      // Display with source attribution
-      const sourceName = Object.keys(SOURCES).find(key => 
-        loadedLines[key].includes(randomLine)
-      );
-      outputEl.innerHTML = `"${randomLine}"<br><small>— from ${sourceName}</small>`;
-    }
-
-    // Event Listeners
-    sourceToggles.forEach(toggle => {
-      toggle.addEventListener('change', (e) => {
-        const source = e.target.dataset.source;
-        if (e.target.checked) {
-          activeSources.add(source);
-        } else {
-          activeSources.delete(source);
-        }
-      });
-    });
-
-    generateBtn.addEventListener('click', generateRandomLine);
-
-    // Initialize
-    loadAllSources();
-  </script>
+        // Begin the Rite
+        loadProphecies();
+    </script>
 </body>
 </html>
