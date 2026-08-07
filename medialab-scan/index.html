@@ -16,35 +16,46 @@
     work on things that do not fit in any one department — instruments, materials,
     satellites, robots, ways of talking to each other. Each group is five to twenty
     people, usually one professor and their graduate students.</p>
-    <p>I went through eight of those groups and their neighbours to see what they are
-    currently making. What follows is not a summary of the Media Lab. It is the places
-    where their work and mine turn out to be about the same thing — sometimes closely
-    enough that we have separately built the same object.</p>
+    <p>I went through ten of those groups and their neighbours to see what they are
+    currently making. What follows is not a summary of the Media Lab. It identifies
+    specific places where their work and mine share a mechanism, method, question or
+    trajectory. Some are close; others are useful because they diverge.</p>
     <p class="note">Everything here is public information from their own websites,
     gathered in August 2026. This page is for me, and for anyone who wants to
     understand what I have been doing and what company it keeps. It is not a
-    ranking and not an argument that these are the same thing — only a record of
-    where the work rhymes.</p>
+    ranking and not an argument that these are equivalent — only a record of what
+    the comparisons make visible.</p>
   </div>
 </header>
 
-<nav class="tabs" aria-label="Views">
-  <button data-view="collisions" class="active">Overlaps</button>
-  <button data-view="groups">The groups</button>
-  <button data-view="everything">Everything</button>
+<nav class="tabs" aria-label="Views" role="tablist">
+  <button id="tab-collisions" data-view="collisions" class="active" role="tab"
+    aria-selected="true" aria-controls="collisions">Overlaps</button>
+  <button id="tab-groups" data-view="groups" role="tab" aria-selected="false"
+    aria-controls="groups" tabindex="-1">The groups</button>
+  <button id="tab-everything" data-view="everything" role="tab" aria-selected="false"
+    aria-controls="everything" tabindex="-1">Everything</button>
 </nav>
 
 <main>
-  <section id="collisions" class="view active">
-    <p class="view-note">Fifteen places where their work and mine meet. The first ten
-    are the close ones.</p>
+  <section id="collisions" class="view active" role="tabpanel"
+    aria-labelledby="tab-collisions" tabindex="0">
+    <p class="view-note">Eighteen places where their work and mine meet. Eleven are
+    featured below. The label on each card identifies the strongest form of connection;
+    open “Where they differ” to see what the comparison does not claim.</p>
+    <section class="routes-block" aria-labelledby="routes-heading">
+      <p class="section-label">Start here</p>
+      <h2 id="routes-heading">Three ways into the survey</h2>
+      <div id="routes-list" class="routes"></div>
+    </section>
     <div id="collisions-featured" class="cards"></div>
     <h2 class="section-break">Further overlaps</h2>
     <div id="collisions-rest" class="cards"></div>
   </section>
 
-  <section id="groups" class="view">
-    <p class="view-note">The eight groups, what each one says it is for, and who is in
+  <section id="groups" class="view" role="tabpanel" aria-labelledby="tab-groups"
+    tabindex="0" hidden>
+    <p class="view-note">The ten groups, what each one says it is for, and who is in
     it. The line in the coloured tag is my own shorthand for what that group shares
     with me.</p>
     <div id="groups-list"></div>
@@ -55,7 +66,8 @@
     <div id="adjacent-list" class="adjacent"></div>
   </section>
 
-  <section id="everything" class="view">
+  <section id="everything" class="view" role="tabpanel" aria-labelledby="tab-everything"
+    tabindex="0" hidden>
     <p class="view-note">Every overlap in one table. Filter by group, or by which of my
     projects it touches.</p>
     <div class="filters">
@@ -73,10 +85,10 @@
 </main>
 
 <footer>
-  <p>Compiled from media.mit.edu, arts.mit.edu, cocreationstudio.mit.edu, tropetank.com
-  and the personal sites of the people named, August 2026. Group rosters and project
-  lists change; several project pages mix current work with archived work from as far
-  back as 2010.</p>
+  <p>Compiled from media.mit.edu, arts.mit.edu, futureheritagelab.com,
+  cocreationstudio.mit.edu, tropetank.com and the personal sites of the people named,
+  August 2026. Group rosters and project lists change; several project pages mix current
+  work with archived work from as far back as 2010.</p>
 </footer>
 
 <script type="module" src="app.js"></script>

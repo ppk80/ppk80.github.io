@@ -183,6 +183,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 }
 
 .tabs button:hover { color: var(--ink); border-color: var(--rule); }
+.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .tabs button.active {
   color: var(--bg-raised);
   background: var(--ink);
@@ -202,6 +203,77 @@ main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
   color: var(--ink-faint);
   max-width: 38rem;
   margin: 0 0 2.5rem;
+}
+
+/* ---------- routes into the survey ---------- */
+
+.routes-block {
+  margin: 0 0 3.5rem;
+  padding: 1.5rem 0 2rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.section-label {
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 600;
+  margin: 0 0 .45rem;
+}
+
+.routes-block > h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.routes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .85rem;
+}
+
+.route {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--rule-soft);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg-raised) 58%, transparent);
+}
+
+.route h3 {
+  margin: 0 0 .5rem;
+  font-family: var(--sans);
+  font-size: .88rem;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.route p {
+  margin: 0 0 .75rem;
+  color: var(--ink-soft);
+  font-size: .88rem;
+  line-height: 1.5;
+}
+
+.route ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--sans);
+  font-size: .77rem;
+  line-height: 1.45;
+}
+
+.route li + li { margin-top: .3rem; }
+.route a { color: var(--accent); overflow-wrap: anywhere; }
+
+@media (max-width: 44rem) {
+  .routes { grid-template-columns: 1fr; }
 }
 
 .section-break {
@@ -226,6 +298,7 @@ main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
   border-radius: 10px;
   padding: 1.75rem;
   box-shadow: var(--shadow);
+  scroll-margin-top: 5rem;
 }
 
 .card-meta {
@@ -239,6 +312,13 @@ main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
   text-transform: uppercase;
   color: var(--ink-faint);
   margin-bottom: .9rem;
+}
+
+.overlap-kind {
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 999px;
+  padding: .08rem .45rem;
 }
 
 .card h3 {
@@ -308,6 +388,25 @@ main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
   padding-left: 1rem;
   color: var(--ink-faint);
 }
+
+.contrast {
+  margin: 1.1rem 0 0;
+  padding-top: .85rem;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.contrast summary {
+  width: max-content;
+  max-width: 100%;
+  font-family: var(--sans);
+  font-size: .76rem;
+  color: var(--ink-faint);
+  cursor: pointer;
+}
+
+.contrast summary:hover { color: var(--ink); }
+.contrast summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.contrast p { margin: .7rem 0 0; font-size: .9rem; color: var(--ink-faint); }
 
 /* ---------- group cards ---------- */
 
@@ -486,6 +585,7 @@ td {
 td.t-mine { color: var(--mine); font-weight: 600; min-width: 11rem; }
 td.t-them { color: var(--ink); min-width: 12rem; }
 td.t-group { font-family: var(--sans); font-size: .82rem; color: var(--ink-faint); white-space: nowrap; }
+td.t-kind { font-family: var(--sans); font-size: .78rem; color: var(--accent); white-space: nowrap; }
 td.t-what { min-width: 18rem; }
 
 .empty {

@@ -1,20 +1,18 @@
 # medialab-scan
 
-A private survey of the MIT Media Lab and its neighbours, organised around where their
+A public survey of the MIT Media Lab and its neighbours, organised around where their
 work and mine overlap.
 
 Written for family and friends as much as for me, so the copy explains what beating, just
 intonation, tangible bits and cosmopoetics actually are rather than assuming them.
 
-**Location and status.** Lives in the `ppk80.github.io` repo at `f:\xyhtamura\`, not under
-`f:\xyh\`. The `f:\xyh` root server on port 8000 cannot reach it. Use the `ppk80` entry in
-`f:\xyh\.claude\launch.json`, which serves `f:/xyhtamura/ppk80.github.io` on port 8001 so
-local paths match the live site: `http://localhost:8001/medialab-scan/`.
+**Location and status.** Lives at `f:\xyh\ppk80.github.io\medialab-scan` in the
+`ppk80.github.io` repository. Preview it through the shared root server at
+`http://localhost:8000/ppk80.github.io/medialab-scan/`.
 
 It is **committed, pushed and publicly live** at https://ppk80.github.io/medialab-scan/,
-including this notes file. That was not the original intent — the page was written on the
-assumption it would stay private, and the kicker still said "A private survey" until
-2026-08-07. Copy that reads differently in public is flagged under Undone below.
+including this notes file. It began as a private survey, but the public-facing copy and
+comparison claims were reviewed on 2026-08-07.
 
 ## Structure
 
@@ -30,9 +28,10 @@ assumption it would stay private, and the kicker still said "A private survey" u
 | Export | What it holds |
 |---|---|
 | `mine` | Xyh's own projects and writing, keyed by id, each with a plain-language blurb |
-| `groups` | The eight Media Lab groups: mission quote, plain-language gloss, `axis` tag, people |
-| `adjacent` | Seven places outside the Media Lab doing related work |
-| `collisions` | The pairings. `featured: true` puts one on the front of the page |
+| `groups` | Ten Media Lab groups: mission quote, plain-language gloss, `axis` tag, people |
+| `adjacent` | Nine places outside the Media Lab doing related work |
+| `routes` | Three short thematic paths into selected overlap cards |
+| `collisions` | Eighteen pairings. `featured: true` puts one on the front of the page |
 
 Links live on the records, not in the markup. `mine[id].url`, `groups[].url`,
 `groups[].people[].url`, `adjacent[].url`, and `collisions[].src[]` are all optional —
@@ -45,13 +44,34 @@ Every view is a projection of it — the front page reads it filtered by `featur
 table reads it filtered by group and by `mine[]` membership. Adding a new overlap means
 appending one object and nothing else.
 
+Every collision has a `kind` label and a short `contrast` statement. The label names the
+strongest connection; the contrast is rendered in a closed “Where they differ” disclosure
+so the comparison does not imply equivalence. `routeLabel` is optional and supplies a
+shorter label when a collision appears in `routes`.
+
 The `axis` field on each group is my shorthand for what that group shares with me:
-*how Xyh works* (Future Sketches), *what Xyh makes* (Opera of the Future), *what Xyh is
-haunted by* (Tangible Media), *how Xyh was trained* (Responsive Environments), *what Xyh
-argues* (Critical Matter, Space Enabled, Cyborg Psychology), *how Xyh does research*
-(Center for Constructive Communication).
+*how Xyh works* (Future Sketches, Viral Communications), *what Xyh makes* (Opera of the
+Future), *what Xyh is haunted by* (Tangible Media), *how Xyh was trained* (Responsive
+Environments), *what Xyh argues* (Critical Matter, Space Enabled, Cyborg Psychology,
+Affective Computing), and *how Xyh does research* (Center for Constructive Communication).
 
 ## Verified
+
+2026-08-07, Codex pass in the rendered desktop browser:
+
+- 18 overlap cards: 11 featured and 7 further; every card has a kind label and a closed
+  contrast disclosure
+- 10 group cards, 9 adjacent cards, 3 thematic route cards and 18 index rows
+- Route links land on the expected overlap; the Resonance contrast opens and renders
+- Tabs work by click and with Left/Right/Home/End keys; `aria-selected`, focus and the
+  visible tab panel stay in agreement
+- Critical Matter filter → 2 rows (Gaze to the Stars and Resonance); Clear → 18
+- Rendered at 1280px in dark mode with no horizontal document overflow; the route index,
+  card labels, disclosures and the new Resonance card were inspected visually
+- New official sources for Resonance, Open Dance Lab, MIT Music Technology and Future
+  Heritage Lab were opened and checked before being added
+
+### Earlier verification history
 
 2026-08-07, in the browser at 1265px and at 375px, light and dark:
 
@@ -85,23 +105,11 @@ Fixed during the build:
 
 ## Undone / known gaps
 
-- **The page is public and some of it was written as if it were not.** Card headlines
-  compare named MIT graduate students to Xyh directly — "One graduate student is working
-  on exactly the problem Xyh has four pieces of work for" names Antonis Christou by the
-  card he sits on. Nothing there is unkind or untrue, but it was drafted for family, not
-  for the person described, who can now read it. Worth a pass with that reader in mind, or
-  a decision to keep it as is. `NOTES.md` is also served at the public URL.
-
-- **No screenshot was ever taken.** The Browser pane was not displayed during the build,
-  so every check above is structural — computed styles, geometry, element counts — and
-  nobody has actually looked at the page. Typography, rhythm, and whether the paired
-  Mine/Theirs blocks read well are all unverified.
-- **Sixteen Media Lab groups were never examined**: Fluid Interfaces, Camera Culture,
-  Affective Computing, City Science, Lifelong Kindergarten, Personal Robots, Conformable
-  Decoders, Multisensory Intelligence, Social Algorithms, Viral Communications, Human
-  Dynamics, Signal Kinetics, Sculpting Evolution, Molecular Machines, Nano Cybernetic
-  Biotrek, Biomechatronics. The eight covered were chosen for closeness to my work, not
-  for coverage.
+- **Fourteen Media Lab groups were never examined**: Fluid Interfaces, Camera Culture,
+  City Science, Lifelong Kindergarten, Personal Robots, Conformable Decoders,
+  Multisensory Intelligence, Social Algorithms, Human Dynamics, Signal Kinetics,
+  Sculpting Evolution, Molecular Machines, Nano Cybernetic Biotrek and Biomechatronics.
+  The ten covered were chosen for closeness to my work, not for coverage.
 - **Some entries still have no link.** Unpublished work — Numinous Drift, Close Harmony,
   Deskarium, Coping, Mouthkit, Navivi, the radial poetics essay — and a handful of people
   with no public page: Chloe Bensahel, Qijing Li, Yufeng Zhao, Treyden Chiaravalloti,
@@ -110,14 +118,23 @@ Fixed during the build:
   graduate students. Most of these do have Media Lab people pages; they were not looked up.
 - **Dates decay.** Group rosters and project lists were read in August 2026. Several
   Media Lab project pages mix current work with archived work back to 2010 without
-  marking which is which, so some entries may already be historical.
-- **Two facts are inference, not sourced.** That Gliese shares its mathematics with the
+  marking which is which, so some entries may already be historical. This is the next
+  maintenance problem to solve in the data model.
+- **One fact is inference, not sourced.** That Gliese shares its mathematics with the
   submarine-tracking acoustics behind the radial poetics essay is my own reading, not
-  something either source states. That Stanzuary was built without knowledge of Muriel
-  Cooper's Information Landscapes is my assumption — worth confirming before repeating it.
+  something either source states. The former assumption that Stanzuary was built without
+  knowledge of Information Landscapes has been removed from the public claim.
+- The 2026-08-07 additions were inspected visually at desktop width. The existing mobile
+  rules remain in place and the new route cards collapse to one column below 44rem, but a
+  fresh 375px visual pass was not run after this change.
 - The Center for Constructive Communication has no overlap of its own in the table; the
   Local Voices Network is folded into the Critical Matter card. If it earns a card, it
   should be split out.
+
+## Next in Dev
+
+Add `checked` and `status` fields to the research records so active, recent and archival
+work can be distinguished as the survey ages.
 
 Working notes with the full unedited survey, including the candid assessments left off
 this page, are in the session scratchpad at `medialab-scan-notes.md`.
@@ -168,3 +185,17 @@ listed above.
 
 2026-08-07 — Antigravity — Expanded outbound links to 172 across 41 hosts by adding MIT Media Lab people profile pages, Wikipedia entries, individual project pages (Automatar, After AGI, MirrorFugue, InSituWear, Resonance, Doppelmarsh, BuzzCam, HearThere, Cyber Subin, Aspen Movie Splat, Refraction, On Reaction-Diffusion), and faculty pages for adjacent entities (ACT artists Renée Green, Judith Barry, Joan Jonas, Krzysztof Wodiczko; Co-Creation Studio's Kat Cizek & Ceasar McDowell). Every added URL was curl/HTTP verified before inclusion.
 
+2026-08-07 — Codex — Reviewed the rendered public page and completed the first
+public-facing comparison pass. Corrected the stale counts to 10 groups and 18 overlaps;
+added Resonance as an eleventh featured comparison; expanded Cyber Subin into Open Dance
+Lab; and added the MIT Music Technology Program and Future Heritage Lab, bringing the
+adjacent list to nine. Added three thematic routes, a Mechanical / Methodological /
+Conceptual / Biographical label on every overlap, and a closed “Where they differ”
+statement on all 18 cards. Removed the unsupported claim that Stanzuary was developed
+without knowledge of Information Landscapes and softened two named-researcher headlines.
+Made the three views proper keyboard-operable tabs and exposed the overlap kind in the
+index. Verified the 18/11/7 counts, route jump, contrast disclosure, tab keyboard state,
+Critical Matter filter and desktop dark rendering at 1280px. New external sources were
+opened successfully; the separate `musictech.mit.edu` programme link returned 502 to the
+checker and was omitted in favour of the resolving Arts at MIT course page. A fresh 375px
+visual pass remains undone. — Codex

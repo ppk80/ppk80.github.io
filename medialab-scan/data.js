@@ -204,13 +204,33 @@ export const adjacent = [
   { name: "ACT", where: "MIT School of Architecture and Planning", who: "Renée Green, Judith Barry, Joan Jonas, Krzysztof Wodiczko", url: "https://act.mit.edu/about/mission/", extra: [{ label: "Renée Green", url: "https://act.mit.edu/people/renee-green/" }, { label: "Judith Barry", url: "https://act.mit.edu/people/judith-barry/" }, { label: "Joan Jonas", url: "https://act.mit.edu/people/joan-jonas/" }, { label: "Krzysztof Wodiczko", url: "https://act.mit.edu/people/krzysztof-wodiczko/" }], what: "MIT's critical art programme. More installation, theory and discourse than engineering." },
   { name: "metaLAB", where: "Harvard, Berlin, Basel", who: "—", url: "https://metalab.harvard.edu/", what: "Critical and creative practice across disciplines." },
   { name: "CAMLab", where: "Harvard", who: "—", url: "https://camlab.fas.harvard.edu/", what: "Immersive sensory media built out of humanities research." },
-  { name: "CCRMA", where: "Stanford", who: "—", url: "https://ccrma.stanford.edu/groups", what: "Computer music research; its Max Lab is the centre for building physical things you play sound with." }
+  { name: "CCRMA", where: "Stanford", who: "—", url: "https://ccrma.stanford.edu/groups", what: "Computer music research; its Max Lab is the centre for building physical things you play sound with." },
+  { name: "MIT Music Technology Program", where: "MIT Music and EECS", who: "Mark Rau", url: "https://arts.mit.edu/projects/musical-acoustics-synthesis-and-audio-effects/", what: "A new programme joining musical practice to engineering. Its 2026 musical-acoustics course covers physical modelling, digital waveguides, modal models, finite-difference schemes, instrument building, room acoustics and real-time audio programming. This is the closest institutional match here for Gliese and Xyh's instrument-making work." },
+  { name: "Future Heritage Lab", where: "MIT Architecture", who: "Azra Akšamija", url: "https://www.futureheritagelab.com/", extra: [{ label: "Projects", url: "https://www.futureheritagelab.com/projects" }], what: "Uses participatory art, textiles, public interventions and digital platforms to keep cultural heritage active rather than fixed. Urban Heat Chronicles and Weft of Waste join environmental conditions, community knowledge, craft and cultural memory — close to the territory of Tanim-Kalye, Istorya and Makwela." }
+];
+
+export const routes = [
+  {
+    name: "Physical systems and instruments",
+    description: "Sound, bodies, rooms and materials treated as systems that can be measured, modelled or played.",
+    collisions: ["resonance-transduction", "physics-paradiso", "desiderata-vocalvibrations", "gliese-room"]
+  },
+  {
+    name: "Living archives and participation",
+    description: "Cultural knowledge gathered with people, encoded into public forms, and kept available for further use.",
+    collisions: ["istorya-gaze", "interiority-cybersubin", "radialpoetics-cosmopoetics"]
+  },
+  {
+    name: "Interiority, affect and machine partners",
+    description: "Work that asks where a feeling, memory or relationship resides when it passes through a technical system.",
+    collisions: ["hauntotechnics-teleabsence", "feelingtogether-affect", "interiority-cybersubin"]
+  }
 ];
 
 // The pairings. `featured: true` puts it on the front of the page.
 export const collisions = [
   {
-    id: "stanzuary-cooper", featured: true, group: "future-sketches",
+    id: "stanzuary-cooper", featured: true, group: "future-sketches", kind: "Mechanical",
     mine: ["stanzuary"],
     them: "Information Landscapes",
     who: "Muriel Cooper, David Small, Suguru Ishizaki and Lisa Strausfeld",
@@ -218,12 +238,14 @@ export const collisions = [
       { label: "Muriel Cooper", url: "https://en.wikipedia.org/wiki/Muriel_Cooper" },
       { label: "On Information Landscapes", url: "https://revue-backoffice.com/en/issues/01-making-do-making-with/nolwenn-maudet-muriel-cooper-information-landscapes" }
     ],
-    headline: "Xyh rebuilt the project the group is named after, without knowing it was there",
-    note: "Muriel Cooper ran the Visible Language Workshop, which moved into the Media Lab in 1985 as one of its founding groups. She built an interface in which text sat in three-dimensional space and the reader flew through it, and showed it at a conference in 1994. Future Sketches is named in her honour. Stanzuary is a text editor where words are placed in three dimensions and you move through them. Same object, thirty years apart, arrived at independently and in a web browser.",
-    also: "Machover's professorship is also named after Cooper. Her name sits on the group closest to how Xyh works and on the chair of the group closest to what Xyh makes."
+    headline: "Stanzuary and Information Landscapes use the same uncommon spatial premise",
+    note: "Muriel Cooper ran the Visible Language Workshop, which moved into the Media Lab in 1985 as one of its founding groups. She built an interface in which text sat in three-dimensional space and the reader flew through it, and showed it at a conference in 1994. Future Sketches is named in her honour. Stanzuary is a text editor where words are placed in three dimensions and you move through them. The resemblance is unusually specific, but whether Stanzuary was developed independently has not been confirmed.",
+    also: "Machover's professorship is also named after Cooper. Her name sits on the group closest to how Xyh works and on the chair of the group closest to what Xyh makes.",
+    contrast: "Information Landscapes was a 1990s institutional research prototype; Stanzuary is a current browser-based editor. The shared spatial premise does not establish a shared lineage."
   },
   {
-    id: "hauntotechnics-teleabsence", featured: true, group: "tangible-media",
+    id: "hauntotechnics-teleabsence", featured: true, group: "tangible-media", kind: "Conceptual",
+    routeLabel: "Mediated haunting",
     mine: ["hauntotechnics", "interiority", "ofanothershore", "insulae", "shook"],
     them: "TeleAbsence",
     who: "Hiroshi Ishii, with MirrorFugue by Xiao Xiao",
@@ -234,10 +256,11 @@ export const collisions = [
     ],
     headline: "The same argument about being haunted, one written and one built",
     note: "TeleAbsence builds channels of imagined communication with the dead and with earlier versions of oneself. Its starting quote is from the Japanese writer Rokusuke Ei: people die twice, first when they die, then when they are forgotten. Ishii is explicit that this is not about synthesising a convincing copy of a person. He calls the aim a poetic encounter, and builds it around objects the person actually touched — typewriters, telephones, brushes, pianos. Hauntotechnics argues that haunting is mediated and works differently in different cultures; From Interiority to Interaction gets at the same question from the other side, through Japanese ways of treating the dead, the unconscious and other presences as parties you can still be in relation with. TeleAbsence is that argument as hardware, made by a Japanese researcher from a Japanese source.",
-    also: "The other three approach it as making a place speak rather than a person. Insulae Incognita generates islands out of the scripts of cultures that traded with Manila before Spanish contact, imagining a past by writing it back into land. Shook reads earthquake damage as inherited rather than accidental. And MirrorFugue, in the same group, projects a dead composer's last recorded performance so living musicians can play alongside him."
+    also: "The other three approach it as making a place speak rather than a person. Insulae Incognita generates islands out of the scripts of cultures that traded with Manila before Spanish contact, imagining a past by writing it back into land. Shook reads earthquake damage as inherited rather than accidental. And MirrorFugue, in the same group, projects a dead composer's last recorded performance so living musicians can play alongside him.",
+    contrast: "TeleAbsence is a set of physical interfaces organised around particular inherited objects. Xyh's related work is distributed across theory, fiction and place-based systems rather than one hardware programme."
   },
   {
-    id: "ombaklock-limiter", featured: true, group: "opera-of-the-future",
+    id: "ombaklock-limiter", featured: true, group: "opera-of-the-future", kind: "Mechanical",
     mine: ["ombaklock", "antemelos", "aliquoto", "desiderata"],
     them: "LIMITER: the Microtonal Arcade Machine",
     who: "Antonis Christou",
@@ -245,12 +268,13 @@ export const collisions = [
       { label: "LIMITER", url: "https://www.media.mit.edu/projects/limiter-the-microtonal-arcade-machine/overview/" },
       { label: "Automatar", url: "https://www.media.mit.edu/projects/automatar/overview/" }
     ],
-    headline: "One graduate student is working on exactly the problem Xyh has four pieces of work for",
+    headline: "Four pieces of Xyh's work converge on one microtonal instrument",
     note: "Most Western music uses twelve fixed notes. Tuning by whole-number ratios instead gives purer intervals but is hard to play, because the available notes keep changing. LIMITER solves this by making it an arcade game: a joystick and one button, tuning systems swappable mid-performance, and a visual display that hides the arithmetic while staying readable to the audience. Xyh has four pieces of work in the same territory — a puzzle game built on beating rates, a melody generator that ignores scales entirely, a synthesizer with the ratios exposed as controls, and an album whose voices are tuned against oceans and insects rather than against a keyboard.",
-    also: "Christou also built the Automatar, a string instrument with a graphics processor mounted inside it that listens to how it is being played and answers by vibrating its own strings."
+    also: "Christou also built the Automatar, a string instrument with a graphics processor mounted inside it that listens to how it is being played and answers by vibrating its own strings.",
+    contrast: "LIMITER concentrates the tuning problem in one custom performance instrument. Xyh's responses divide it among a game, a generator, a synthesizer and a finished recording."
   },
   {
-    id: "tabota-mediascores", featured: true, group: "opera-of-the-future",
+    id: "tabota-mediascores", featured: true, group: "opera-of-the-future", kind: "Mechanical",
     mine: ["tabota"],
     them: "Media Scores, and Dither",
     who: "Peter Torpey (Opera of the Future) and Lingdong Huang (Future Sketches)",
@@ -261,20 +285,24 @@ export const collisions = [
     ],
     headline: "Two people at the Lab have built what TaboTa is, from opposite directions",
     note: "Torpey's doctoral thesis, Media Scores, is a system for writing one score that drives several media at once — sound, light, image, movement — so a work can be composed as a whole rather than assembled from separate tracks. That is what TaboTa is for. The difference is that Media Scores is a finished dissertation and TaboTa is load-bearing infrastructure running across nine active projects.",
-    also: "Separately, Lingdong Huang wrote Dither, his own programming language for making visual and audio work. A graduate student in each group has decided the right response to this field is to build a language. So has Xyh."
+    also: "Separately, Lingdong Huang wrote Dither, his own programming language for making visual and audio work. A graduate student in each group has decided the right response to this field is to build a language. So has Xyh.",
+    contrast: "Media Scores was developed as a dissertation and performance system. TaboTa is a shared interchange format serving several independently built applications."
   },
   {
-    id: "radialpoetics-cosmopoetics", featured: true, group: "space-enabled",
+    id: "radialpoetics-cosmopoetics", featured: true, group: "space-enabled", kind: "Conceptual",
+    routeLabel: "Radial cosmologies",
     mine: ["radialpoetics", "gliese"],
     them: "Braided Cosmopoetics: The Khasi Cosmo-vision for an Ethical Space Exploration",
     who: "Prathima Muniyappa",
     src: [{ label: "Braided Cosmopoetics", url: "https://www.media.mit.edu/projects/braided-cosmopoetics-the-khasi-cosmo-vison-for-an-ethical-space-exploration/overview/" }],
     headline: "Two accounts of the same picture — a line drawn from the centre of a world to the sky",
     note: "The Khasi people of Meghalaya, in northeastern India, trace their ancestry to the stars and are known for growing bridges by braiding living tree roots. At the centre of their oral history is Sophtehpenanang: a tree whose roots reached the depths of the earth and whose canopy reached the heavens, rising from the earth's navel, understood as a stairway for travelling to the sky. Xyh's essay traces the same shape — the vertical line through a planet, core to surface to space — but arrives at it through Cold War submarine sonar, nuclear-test seismology and mining. Two independent genealogies of one image, and neither is complete without the other.",
-    also: "Space Enabled's applied work — watching deforestation in Ghana, drought in Angola, invasive species in Benin — is the exact move the essay's last paragraph proposes: taking an instrument built for war and extraction and pointing it somewhere else. There is also a likely link to Gliese, which traces sound rays through layered air using the same mathematics developed for tracking submarines through layered ocean."
+    also: "Space Enabled's applied work — watching deforestation in Ghana, drought in Angola, invasive species in Benin — is the exact move the essay's last paragraph proposes: taking an instrument built for war and extraction and pointing it somewhere else. There is also a likely link to Gliese, which traces sound rays through layered air using the same mathematics developed for tracking submarines through layered ocean.",
+    contrast: "Braided Cosmopoetics begins from a living Khasi cosmology. Radial poetics reconstructs a history of military and extractive instruments; the recurring image does not make those knowledge systems interchangeable."
   },
   {
-    id: "istorya-gaze", featured: true, group: "critical-matter",
+    id: "istorya-gaze", featured: true, group: "critical-matter", kind: "Methodological",
+    routeLabel: "Community stories in public form",
     mine: ["istorya", "makwela", "tanimkalye"],
     them: "Gaze to the Stars, and the Local Voices Network",
     who: "Behnaz Farahi (Critical Matter) and Deb Roy's centre with Cortico",
@@ -285,10 +313,11 @@ export const collisions = [
     ],
     headline: "The same method, run on a dome and run on a town",
     note: "Over two hundred people sat in a pod and spoke their dreams and fears aloud to an AI voice that spoke back as the building itself. Their eye movements and words were recorded, each story was summarised and written in Braille over close-up video of that person's iris, and the result was projected onto MIT's Great Dome for three nights in March 2025. Passers-by could point a phone at it and read the individual story. Structurally this is Istorya sang Bȧlatyagon: gather people, elicit personal narrative tied to a place, encode it into something public, let strangers navigate it. Farahi swapped the map for a building and photography for iris video.",
-    also: "The Local Voices Network is the same operation without the artwork — facilitated in-person conversations in real towns, recorded, connected across distance, and opened as a listening channel for journalists and local leaders. Where Xyh's versions are geographic and arts-based, this one is civic and conversational."
+    also: "The Local Voices Network is the same operation without the artwork — facilitated in-person conversations in real towns, recorded, connected across distance, and opened as a listening channel for journalists and local leaders. Where Xyh's versions are geographic and arts-based, this one is civic and conversational.",
+    contrast: "Gaze to the Stars is an AI-mediated artwork using biometric imagery at MIT. Istorya was a locally situated community method built for a gender audit, with different questions of governance and consent."
   },
   {
-    id: "eosforos-paracantora", featured: true, group: "opera-of-the-future",
+    id: "eosforos-paracantora", featured: true, group: "opera-of-the-future", kind: "Methodological",
     mine: ["eosforos", "avemaria", "radialpoetics"],
     them: "El Poema de la Fábrica Cósmica",
     who: "Nicole L'Huillier",
@@ -298,20 +327,23 @@ export const collisions = [
     ],
     headline: "A listening ritual performed inside the machines physicists use",
     note: "The PARACANTORA is a device carrying environmental sensors whose readings are turned into sound in real time — synthesizers, samples, textures, words, other voices — producing a sonic imprint of one moment in one place, and treated in the work as a medium between worlds. The listening sessions were held inside the ALICE detector at CERN's Large Hadron Collider, at the ALMA Observatory in the Atacama Desert, and at the Paranal Observatory, also in the Atacama. Eosforos is a record about the earth's molten first age, performed inside an exhibition on chaos magic. Ave Maria, Gaia Mystica, from 2007, was built from recordings of stars, animals, earth and ice and played on a glass harmonica.",
-    also: "This is also the radial poetics essay carried out rather than written: a detection instrument built for physics, used to make a ritual."
+    also: "This is also the radial poetics essay carried out rather than written: a detection instrument built for physics, used to make a ritual.",
+    contrast: "PARACANTORA is a live sensor instrument used inside scientific facilities. Xyh's works are recordings, performances and an essay that frame scientific material as ritual rather than measuring a site in real time."
   },
   {
-    id: "toys-afterglitch", featured: true, group: "future-sketches",
+    id: "toys-afterglitch", featured: true, group: "future-sketches", kind: "Methodological",
     mine: ["toys"],
     them: "After Glitch",
     who: "Zach Lieberman",
     src: [{ label: "After Glitch", url: "https://www.media.mit.edu/projects/after-glitch/overview/" }],
     headline: "He had to prune his way to fifty self-contained pages; Xyh has fifty by rule",
     note: "Lieberman kept seven years of experiments on a hosting platform called Glitch, whose appeal was that anything you made was immediately online. When he needed to get it all out, he exported everything and wrote a script to clean it up, discarding temporary tests, demonstrations of obsolete technology, and anything that needed a server to run. What survived was, in his words, about fifty projects that are self-contained and run entirely in the browser. That is the same shelf Xyh has — same size, same shape. He reached it by losing a platform and pruning backwards; Xyh's project rules require it from the start, so nothing has to be recovered.",
-    also: null
+    also: null,
+    contrast: "After Glitch is an archive recovered after a hosting platform closed. Xyh's static-first rule is an architectural constraint applied before each project is built."
   },
   {
-    id: "physics-paradiso", featured: true, group: "responsive-environments",
+    id: "physics-paradiso", featured: true, group: "responsive-environments", kind: "Biographical",
+    routeLabel: "Physics and synthesis",
     mine: ["physics", "aliquoto", "cella", "moire"],
     them: "A physics career and a wall of synthesizers",
     who: "Joseph A. Paradiso",
@@ -320,22 +352,40 @@ export const collisions = [
       { label: "His synthesizer, on video", url: "https://news.mit.edu/2012/video-paradiso-synthesizer-0314" },
       { label: "On his work across arts and science", url: "https://www.media.mit.edu/articles/how-joseph-paradiso-s-sensing-innovations-bridge-the-arts-medicine-and-ecology/" }
     ],
-    headline: "Someone at the Lab has already lived this exact combination to the end",
+    headline: "A precedent for treating physics and synthesis as one sustained practice",
     note: "Paradiso took a PhD in experimental high-energy physics at MIT in 1981, built particle detectors at CERN, and designed spacecraft control systems at Draper Lab. In parallel, starting as an undergraduate in 1973 with no electronics training, he taught himself from surplus parts and spent about fifteen years building what is probably the world's largest homemade modular synthesizer — over 125 modules, now in the MIT Museum. Neither half was a hobby. His group also runs Quantizer, which turns particle collision data into music.",
-    also: "This is the one place in the survey where the physics degree and the synthesizers do not need to be explained to anybody."
+    also: "This is the one place in the survey where the physics degree and the synthesizers do not need to be explained to anybody.",
+    contrast: "Paradiso's path runs through experimental particle physics, spacecraft systems and a long academic career. The comparison is a precedent for combining domains, not a claim that the careers or research programmes are the same."
   },
   {
-    id: "desiderata-vocalvibrations", featured: true, group: "opera-of-the-future",
+    id: "desiderata-vocalvibrations", featured: true, group: "opera-of-the-future", kind: "Conceptual",
+    routeLabel: "Voice beyond words",
     mine: ["songs", "desiderata", "intermedia", "glossolalia", "breakfast", "xyhnthesizer", "mouthkit"],
     them: "Vocal Vibrations",
     who: "Tod Machover, Charles Holbrow, Elena Jessop and Rébecca Kleinberger",
     src: [{ label: "Vocal Vibrations", url: "https://www.media.mit.edu/projects/vocal-vibrations-expressive-performance-for-body-mind-wellbeing/overview/" }],
     headline: "The deepest overlap on this page, and the oldest",
     note: "Vocal Vibrations built two rooms: a chapel for listening to a vocal composition, and a cocoon for exploring your own voice alone. The underlying question was whether singing changes mental and physical state through physical vibration rather than through mood. This is where Xyh has the most to put beside a Media Lab project, and the most history — a songwriting career going back to 2009, an album made only from manipulated voice and breath, a paper taking one of those songs apart to show how words and music decide each other, a piece on speaking in tongues, spoken word poems, an instrument sampled entirely from Xyh's own voice, and a tool that chops speech into its individual sounds.",
-    also: "Kleinberger, who came out of this group, describes her subject as the voice beyond words — within a person, between people, and across species. Everything in the left-hand column is a different answer to that same description."
+    also: "Kleinberger, who came out of this group, describes her subject as the voice beyond words — within a person, between people, and across species. Everything in the left-hand column is a different answer to that same description.",
+    contrast: "Vocal Vibrations was an empirical installation about embodied wellbeing. Xyh's related work is a longer artistic corpus and a set of compositional tools rather than a controlled study."
   },
   {
-    id: "cytophone-tidmarsh", featured: false, group: "responsive-environments",
+    id: "resonance-transduction", featured: true, group: "critical-matter", kind: "Mechanical",
+    routeLabel: "Resonance: signal to shared room",
+    mine: ["cytophone", "benzaiten", "gliese"],
+    them: "Resonance",
+    who: "Behnaz Farahi, Ruipeng Wang, Yuxiang Cheng and Annie Xing",
+    src: [
+      { label: "Resonance", url: "https://www.media.mit.edu/projects/resonance_criticalmattergroup/overview/" },
+      { label: "Critical Matter", url: "https://www.media.mit.edu/groups/critical-matter/overview/" }
+    ],
+    headline: "A private signal becomes vibration, water, light and a shared room",
+    note: "Resonance reads the brainwaves of a meditating Buddhist monk, reduces them to a changing index, and uses that signal to drive a transducer under a suspended body of water. The water forms Faraday patterns; light passing through it projects moving caustics into a forty-foot music hall. A state measured from one body becomes vibration, fluid geometry, image and architecture that other people can inhabit.",
+    also: "Cytophone turns biological processes into sound. Benzaiten steers simulations of fluid and magnetic fields with touch and sound. Gliese treats the room itself as part of an acoustic system. Resonance places those otherwise separate operations into one physical chain, and received the Best Art Paper Award at ACM SIGGRAPH 2026.",
+    contrast: "Resonance uses EEG as the control source for a contemplative installation. Xyh's three projects use biological sonification, simulated fields and acoustic modelling separately, without measuring meditation or claiming access to an inner state."
+  },
+  {
+    id: "cytophone-tidmarsh", featured: false, group: "responsive-environments", kind: "Mechanical",
     mine: ["cytophone", "kikik", "avemaria"],
     them: "Tidmarsh Living Observatory, SensorChimes, Doppelmarsh, BuzzCam",
     who: "Joseph A. Paradiso's group",
@@ -346,10 +396,11 @@ export const collisions = [
     ],
     headline: "Listening to an ecosystem as an instrument rather than as a measurement",
     note: "Tidmarsh is a 250-acre wetland in Massachusetts being restored, wired throughout with sensors that stream sound and environmental data continuously. SensorChimes turns that live data into music — a composer sets up the mapping and the landscape plays it — and is described by the group as a canvas for artists. Doppelmarsh lets you walk or fly through the same data rendered as three-dimensional sound. Nearby projects listen for bees and for whole habitats.",
-    also: "Xyh has been doing this at three different scales. Cytophone works at the size of cells and plant tissue. kíkik listens for the moments a sound begins and hands those moments to a swarm that behaves like a colony. Ave Maria, Gaia Mystica did it in 2007, before any of the rest, out of recordings of stars, animals, earth and ice — which makes it the earliest piece of this practice by nearly twenty years."
+    also: "Xyh has been doing this at three different scales. Cytophone works at the size of cells and plant tissue. kíkik listens for the moments a sound begins and hands those moments to a swarm that behaves like a colony. Ave Maria, Gaia Mystica did it in 2007, before any of the rest, out of recordings of stars, animals, earth and ice — which makes it the earliest piece of this practice by nearly twenty years.",
+    contrast: "Tidmarsh begins with continuous sensor data from a particular wetland. Xyh's works use biological processes, recorded material and simulated swarm behaviour at different scales rather than one monitored ecosystem."
   },
   {
-    id: "scent", featured: false, group: "tangible-media",
+    id: "scent", featured: false, group: "tangible-media", kind: "Conceptual",
     mine: [],
     them: "The Anemoia Device, and Gamma SENSE",
     who: "Cyrus Clarke (Tangible Media) and Alexandra Rieger (Opera of the Future)",
@@ -360,10 +411,12 @@ export const collisions = [
     ],
     headline: "Smell has two independent laboratories at the Lab, and one of them is about nostalgia",
     note: "The Anemoia Device takes a printed photograph, reads it with an AI, lets you shape the result with three dials, and blends a custom perfume from fifty base notes — sandalwood, pine forest, leather, old books, sand — pumped in one-second increments. It is named for anemoia: nostalgia for a time you never lived through. That is the exact feeling the vaporwave and hauntology communities Xyh helped build are organised around. Separately, Alexandra Rieger builds instruments that are also medical devices, including a scent instrument and an olfactory test used with Massachusetts General Hospital to detect dementia early.",
-    also: "Xyh's listed skills include cosmetic and fragrance technology. It has two homes here, in different groups, both active."
+    also: "Xyh's listed skills include cosmetic and fragrance technology. It has two homes here, in different groups, both active.",
+    contrast: "The Media Lab work consists of research devices for memory and diagnosis. Xyh's connection is professional fragrance and cosmetics knowledge; no linked project currently makes the comparison material."
   },
   {
-    id: "gliese-room", featured: false, group: "opera-of-the-future",
+    id: "gliese-room", featured: false, group: "opera-of-the-future", kind: "Mechanical",
+    routeLabel: "The room as instrument",
     mine: ["gliese", "metachamber", "desiderata"],
     them: "Playing the Room, Spaces that Perform Themselves, HearThere",
     who: "Opera of the Future, and Responsive Environments",
@@ -374,23 +427,27 @@ export const collisions = [
     ],
     headline: "The room treated as part of the instrument",
     note: "Several projects across two groups treat the acoustics of a space as material to compose with rather than as a container to correct for, including a machine-learning system for predicting how a room will sound. HearThere, in Paradiso's group, fixes virtual sounds to physical locations so they stay put as you walk.",
-    also: "Gliese builds its room from physics, tracing sound rays through layered air rather than approximating the result. Metachamber goes further and makes the room answer to the recording: it looks ahead for the silences and fits each reverb tail to the gap it has to die in. Desiderata is what that sounds like used as material rather than as an effect."
+    also: "Gliese builds its room from physics, tracing sound rays through layered air rather than approximating the result. Metachamber goes further and makes the room answer to the recording: it looks ahead for the silences and fits each reverb tail to the gap it has to die in. Desiderata is what that sounds like used as material rather than as an effect.",
+    contrast: "The MIT projects predict, record or attach sound to actual sites. Gliese and Metachamber are signal-processing systems that construct an acoustic space for recorded material."
   },
   {
-    id: "interiority-cybersubin", featured: false, group: "cyborg-psychology",
-    mine: ["interiority"],
-    them: "Cyber Subin: Human-AI Co-Dancing",
+    id: "interiority-cybersubin", featured: false, group: "cyborg-psychology", kind: "Conceptual",
+    routeLabel: "Open Dance Lab: a living archive",
+    mine: ["interiority", "tabota", "intermedia"],
+    them: "Cyber Subin, and Open Dance Lab",
     who: "Pat Pataranutaporn's group",
     src: [
       { label: "Cyber Subin", url: "https://www.media.mit.edu/projects/cyber-subin/overview/" },
+      { label: "Open Dance Lab", url: "https://www.media.mit.edu/projects/open-dance-lab/overview/" },
       { label: "Cyborg Psychology projects", url: "https://www.media.mit.edu/groups/cyborg-psychology/projects/" }
     ],
-    headline: "Asking what a machine partner is, from inside a specific culture rather than in general",
-    note: "Cyber Subin builds choreography between dancers and generative AI characters, working from Thai classical dance rather than from a generic idea of movement. Xyh's published paper does the parallel thing in argument, using Japanese practices around robots and dolls to reframe what counts as a person in an exchange. The group also studies AI-induced false memories, emotional dependence on AI companions, and a project on people in relationships with chatbots.",
-    also: "Of the three research pillars this group names, the third is collaboration with artists and humanities researchers on speculative work — an explicit opening for exactly this kind of writing."
+    headline: "A machine partner grounded in one culture, and an archive designed to keep changing",
+    note: "Cyber Subin builds choreography between dancers and generative AI characters from Thai classical dance rather than from a generic idea of movement. Open Dance Lab extends that research into a public web platform: fifty-nine Mae Bot Yai poses become interactive 3D models with expert annotations, six choreographic principles can be examined, and new sequences can be generated from them. It treats preservation as a process of examining, experimenting and evolving rather than storing a fixed record.",
+    also: "From Interiority to Interaction makes the parallel cultural argument through Japanese practices around robots and dolls. TaboTa provides a format for scoring movement beside sound and image, while the Night Bus paper describes forms as deciding each other rather than arriving in sequence. Open Dance Lab gives those two structural concerns a specific living tradition to work through.",
+    contrast: "Open Dance Lab encodes one Thai dance tradition through motion capture, expert annotation and generative movement. Xyh's related work provides a philosophical argument and general media structures, not a dance archive or heritage authority."
   },
   {
-    id: "web-poetics", featured: false, group: "future-sketches",
+    id: "web-poetics", featured: false, group: "future-sketches", kind: "Methodological",
     mine: ["cornice", "deskarium", "w2xdx", "benzaiten", "coping", "aeropane", "kubocities", "dungeonsynth"],
     them: "FaceTerm, C-Trend Live, Aspen Movie Splat, Reviving Design by Numbers, On Reaction-Diffusion, Refraction",
     who: "Future Sketches",
@@ -402,10 +459,11 @@ export const collisions = [
     ],
     headline: "A group whose stated method is going back to old computing to find unused futures",
     note: "The group describes its sketches as a way of engaging with the past to suggest different possible futures. In practice: rebuilding a 1970s interactive map as a modern 3D scan, restoring John Maeda's 1999 programming environment in JavaScript, running live webcam feeds through a video synthesizer design from the 1970s, turning visitors into text characters. That is the same operation as W2XDX's invented television standard, Cornice and Deskarium drawn in text characters, KuboCities in 1990s web style, and the dungeon synth paper on a genre that reconstructs a medieval past that never happened.",
-    also: null
+    also: null,
+    contrast: "Future Sketches reconstructs documented computing artefacts and research lineages. Several of Xyh's projects instead invent counter-histories or styles for technologies that never existed."
   },
   {
-    id: "hindcasts-toolkits", featured: false, group: "future-sketches",
+    id: "hindcasts-toolkits", featured: false, group: "future-sketches", kind: "Methodological",
     mine: ["hindcasts", "cornerfit", "stitcher"],
     them: "openFrameworks, Dither, FrameGrabber, Srcsnap",
     who: "Zach Lieberman, Theo Watson and Arturo Castro; Lingdong Huang",
@@ -416,10 +474,12 @@ export const collisions = [
     ],
     headline: "Tools built because something needed doing, counted as research rather than overhead",
     note: "Future Sketches states its purpose in two halves. The first is code as a medium. The second is toolkits — how they, and the way they are taught, shape what a generation of people can make. openFrameworks came out of exactly that: Lieberman was teaching at Parsons, needed building blocks for artists working in code, and released the first version in August 2005. He describes it plainly as a set of tools you can build with. It is indebted to Processing and to the ACU Toolkit, a privately circulated library from the Media Lab's own Aesthetics and Computation Group, so the lineage runs back into this building.",
-    also: "Hindcasts, cornerfit and stitcher are the same kind of object — made because the work required them, not as pieces in themselves. Worth knowing that a research group at MIT treats that category as an output rather than as the unglamorous part. Lingdong Huang's Dither, and the group's small utilities for grabbing animation frames and tracking design versions, sit in the same column."
+    also: "Hindcasts, cornerfit and stitcher are the same kind of object — made because the work required them, not as pieces in themselves. Worth knowing that a research group at MIT treats that category as an output rather than as the unglamorous part. Lingdong Huang's Dither, and the group's small utilities for grabbing animation frames and tracking design versions, sit in the same column.",
+    contrast: "openFrameworks is a broad public toolkit with a teaching community and a twenty-year history. Xyh's utilities remain narrower tools built around particular projects and workflows."
   },
   {
-    id: "feelingtogether-affect", featured: false, group: "affective-computing",
+    id: "feelingtogether-affect", featured: false, group: "affective-computing", kind: "Conceptual",
+    routeLabel: "Where feeling is located",
     mine: ["feelingtogether", "interiority", "istorya"],
     them: "Affective Computing, and the Center for Constructive Communication",
     who: "Rosalind W. Picard, and Deb Roy's centre",
@@ -429,6 +489,7 @@ export const collisions = [
     ],
     headline: "A disagreement about where a feeling is located",
     note: "Affective Computing reads emotion off an individual body: heart rate, skin response, facial expression, sleep. The person is the unit, and the feeling is a state inside them that instruments can reach. Feeling Together argues that in the Philippine cultures it examines, feeling is not sealed inside one person and then expressed outward — it runs as a circuit between people, which makes the self relational rather than individual. Those are two different answers to a real question, and the second one is not currently represented at the Lab.",
-    also: "The Center for Constructive Communication is the closer structural fit: it already treats understanding as something produced between people in a facilitated conversation, which is the model the paper argues for, and it is the group whose method most resembles Istorya sang Bȧlatyagon. Viral Communications is a looser match, though its insistence on keeping your data and your algorithms on your own device rhymes with how Xyh builds."
+    also: "The Center for Constructive Communication is the closer structural fit: it already treats understanding as something produced between people in a facilitated conversation, which is the model the paper argues for, and it is the group whose method most resembles Istorya sang Bȧlatyagon. Viral Communications is a looser match, though its insistence on keeping your data and your algorithms on your own device rhymes with how Xyh builds.",
+    contrast: "This card records a disagreement rather than a shared solution. Affective Computing measures signals from individual bodies; Feeling Together argues that feeling can be constituted between people."
   }
 ];

@@ -1,4 +1,4 @@
-import { mine, groups, adjacent, collisions } from "./data.js";
+import { mine, groups, adjacent, routes, collisions } from "./data.js";
 
 const groupName = id => (groups.find(g => g.id === id) || {}).name || id;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -11,6 +11,20 @@ const link = (text, url, cls) => url
 const extras = list => list && list.length
   ? `<span class="extras">${list.map(e => link(e.label, e.url, "extra")).join("<span class=sep>·</span>")}</span>`
   : "";
+
+/* ---------- routes into the survey ---------- */
+
+const collisionById = id => collisions.find(c => c.id === id);
+
+document.getElementById("routes-list").innerHTML = routes.map(route => `
+  <article class="route">
+    <h3>${esc(route.name)}</h3>
+    <p>${esc(route.description)}</p>
+    <ul>${route.collisions.map(id => {
+      const c = collisionById(id);
+      return c ? `<li><a href="#${esc(c.id)}">${esc(c.routeLabel || c.them)}</a></li>` : "";
+    }).join("")}</ul>
+  </article>`).join("");
 
 /* ---------- overlaps ---------- */
 
@@ -26,9 +40,13 @@ function renderCollision(c) {
     ? `<p class="sources"><span class="sources-label">Read more</span>${c.src.map(s => link(s.label, s.url, "extra")).join("<span class=sep>·</span>")}</p>`
     : "";
 
+  const contrast = c.contrast
+    ? `<details class="contrast"><summary>Where they differ</summary><p>${esc(c.contrast)}</p></details>`
+    : "";
+
   return `
-    <article class="card">
-      <p class="card-meta"><span>${esc(groupName(c.group))}</span></p>
+    <article class="card" id="${esc(c.id)}">
+      <p class="card-meta"><span>${esc(groupName(c.group))}</span><span class="overlap-kind">${esc(c.kind)}</span></p>
       <h3>${esc(c.headline)}</h3>
       <div class="pairing">
         <div class="side side-mine">
@@ -44,6 +62,7 @@ function renderCollision(c) {
       </div>
       <p>${esc(c.note)}</p>
       ${c.also ? `<p class="also">${esc(c.also)}</p>` : ""}
+      ${contrast}
       ${sources}
     </article>`;
 }
@@ -106,7 +125,7 @@ function draw() {
   wrap.innerHTML = rows.length ? `
     <table>
       <thead>
-        <tr><th>My work</th><th>Their work</th><th>Group</th><th>What is shared</th></tr>
+        <tr><th>My work</th><th>Their work</th><th>Group</th><th>Kind</th><th>What is shared</th></tr>
       </thead>
       <tbody>
         ${rows.map(c => `
@@ -116,6 +135,7 @@ function draw() {
               : "Fragrance work"}</td>
             <td class="t-them">${c.src && c.src.length ? link(c.them, c.src[0].url) : esc(c.them)}<br><span class="who">${esc(c.who)}</span></td>
             <td class="t-group">${esc(groupName(c.group))}</td>
+            <td class="t-kind">${esc(c.kind)}</td>
             <td class="t-what">${esc(c.headline)}</td>
           </tr>`).join("")}
       </tbody>
@@ -131,12 +151,33 @@ draw();
 
 /* ---------- tabs ---------- */
 
-document.querySelectorAll(".tabs button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
-    btn.classList.add("active");
-    document.getElementById(btn.dataset.view).classList.add("active");
-    window.scrollTo({ top: 0, behavior: "instant" });
+const tabs = [...document.querySelectorAll(".tabs button")];
+
+function activateTab(btn, moveFocus = false) {
+  tabs.forEach(tab => {
+    const selected = tab === btn;
+    const view = document.getElementById(tab.dataset.view);
+    tab.classList.toggle("active", selected);
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+    view.classList.toggle("active", selected);
+    view.hidden = !selected;
+  });
+  if (moveFocus) btn.focus();
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+tabs.forEach((btn, index) => {
+  btn.addEventListener("click", () => activateTab(btn));
+  btn.addEventListener("keydown", event => {
+    let next = null;
+    if (event.key === "ArrowRight") next = tabs[(index + 1) % tabs.length];
+    if (event.key === "ArrowLeft") next = tabs[(index - 1 + tabs.length) % tabs.length];
+    if (event.key === "Home") next = tabs[0];
+    if (event.key === "End") next = tabs[tabs.length - 1];
+    if (next) {
+      event.preventDefault();
+      activateTab(next, true);
+    }
   });
 });
