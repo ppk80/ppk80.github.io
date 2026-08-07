@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MIT Media Lab, and where it meets my work</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">A private survey · August 2026</p>
+  <h1>MIT Media Lab,<br>and where it meets my work</h1>
+  <div class="intro">
+    <p>The MIT Media Lab is a research building where about twenty-four small groups
+    work on things that do not fit in any one department — instruments, materials,
+    satellites, robots, ways of talking to each other. Each group is five to twenty
+    people, usually one professor and their graduate students.</p>
+    <p>I went through eight of those groups and their neighbours to see what they are
+    currently making. What follows is not a summary of the Media Lab. It is the places
+    where their work and mine turn out to be about the same thing — sometimes closely
+    enough that we have separately built the same object.</p>
+    <p class="note">Everything here is public information from their own websites,
+    gathered in August 2026. This page is for me, and for anyone who wants to
+    understand what I have been doing and what company it keeps.</p>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Views">
+  <button data-view="collisions" class="active">Overlaps</button>
+  <button data-view="groups">The groups</button>
+  <button data-view="everything">Everything</button>
+</nav>
+
+<main>
+  <section id="collisions" class="view active">
+    <p class="view-note">Fifteen places where their work and mine meet. The first ten
+    are the close ones.</p>
+    <div id="collisions-featured" class="cards"></div>
+    <h2 class="section-break">Further overlaps</h2>
+    <div id="collisions-rest" class="cards"></div>
+  </section>
+
+  <section id="groups" class="view">
+    <p class="view-note">The eight groups, what each one says it is for, and who is in
+    it. The line in the coloured tag is my own shorthand for what that group shares
+    with me.</p>
+    <div id="groups-list"></div>
+    <h2 class="section-break">Nearby, outside the Media Lab</h2>
+    <p class="view-note">Places at MIT and elsewhere doing related work. The Trope Tank
+    and the Co-Creation Studio are arguably closer to my practice than most of the
+    Media Lab is.</p>
+    <div id="adjacent-list" class="adjacent"></div>
+  </section>
+
+  <section id="everything" class="view">
+    <p class="view-note">Every overlap in one table. Filter by group, or by which of my
+    projects it touches.</p>
+    <div class="filters">
+      <label>Group
+        <select id="filter-group"><option value="">All groups</option></select>
+      </label>
+      <label>My project
+        <select id="filter-mine"><option value="">All of mine</option></select>
+      </label>
+      <button id="filter-clear" type="button">Clear</button>
+    </div>
+    <div id="table-wrap" class="table-wrap"></div>
+    <p id="table-empty" class="empty" hidden>No overlaps match those filters.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Compiled from media.mit.edu, arts.mit.edu, cocreationstudio.mit.edu, tropetank.com
+  and the personal sites of the people named, August 2026. Group rosters and project
+  lists change; several project pages mix current work with archived work from as far
+  back as 2010.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
