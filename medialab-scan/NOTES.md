@@ -3,10 +3,18 @@
 A private survey of the MIT Media Lab and its neighbours, organised around where their
 work and mine overlap.
 
-Not published. Local only, served through the root server at
-`http://localhost:8000/medialab-scan/`. Written for family and friends as much as for me,
-so the copy explains what beating, just intonation, tangible bits and cosmopoetics
-actually are rather than assuming them.
+Written for family and friends as much as for me, so the copy explains what beating, just
+intonation, tangible bits and cosmopoetics actually are rather than assuming them.
+
+**Location and status.** Lives in the `ppk80.github.io` repo at `f:\xyhtamura\`, not under
+`f:\xyh\`. The `f:\xyh` root server on port 8000 cannot reach it. Use the `ppk80` entry in
+`f:\xyh\.claude\launch.json`, which serves `f:/xyhtamura/ppk80.github.io` on port 8001 so
+local paths match the live site: `http://localhost:8001/medialab-scan/`.
+
+It is **committed, pushed and publicly live** at https://ppk80.github.io/medialab-scan/,
+including this notes file. That was not the original intent — the page was written on the
+assumption it would stay private, and the kicker still said "A private survey" until
+2026-08-07. Copy that reads differently in public is flagged under Undone below.
 
 ## Structure
 
@@ -77,6 +85,13 @@ Fixed during the build:
 
 ## Undone / known gaps
 
+- **The page is public and some of it was written as if it were not.** Card headlines
+  compare named MIT graduate students to Xyh directly — "One graduate student is working
+  on exactly the problem Xyh has four pieces of work for" names Antonis Christou by the
+  card he sits on. Nothing there is unkind or untrue, but it was drafted for family, not
+  for the person described, who can now read it. Worth a pass with that reader in mind, or
+  a decision to keep it as is. `NOTES.md` is also served at the public URL.
+
 - **No screenshot was ever taken.** The Browser pane was not displayed during the build,
   so every check above is structural — computed styles, geometry, element counts — and
   nobody has actually looked at the page. Typography, rhythm, and whether the paired
@@ -112,6 +127,22 @@ this page, are in the session scratchpad at `medialab-scan-notes.md`.
 2026-08-07 — Claude Code — Built the page from a survey of eight Media Lab groups plus
 seven adjacent institutions. Data model, three views, filters, light and dark. Verified
 structurally in the browser; see gaps above, particularly that no one has looked at it yet.
+
+2026-08-07 — Claude Code — Project moved to `f:\xyhtamura\ppk80.github.io\medialab-scan`
+and is now live publicly. Added two groups (Affective Computing, Viral Communications) and
+two overlaps. Hindcasts now pairs with openFrameworks and the Future Sketches toolkit half,
+alongside cornerfit and stitcher, on Xyh's framing that these are tools built because
+something needed doing rather than as pieces. Feeling Together pairs against Affective
+Computing, framed as a disagreement about where a feeling is located — read off one body,
+or running as a circuit between people. Now 10 groups, 17 overlaps, 139 unique URLs, all
+checked. Fixed a mobile overflow: `white-space: nowrap` on the extra-link labels broke at
+375px once more links were added; they now wrap. Updated `f:\xyh\ROADMAP.md` — moved the
+entry from Local & Unpublished to Published, corrected both counts and the paths.
+
+Someone else added a large number of people and project links between sessions (Media Lab
+people pages, ACT faculty, the Dither repo, Eran Egozy, Katerina Cizek). All swept and
+resolving. Three sit behind bot checks and return 403/405 to scripts while working in a
+browser: ResearchGate, DSpace, and Nicole L'Huillier's portfolio subpage.
 
 2026-08-07 — Claude Code — Reworked five cards on Xyh's instruction. LIMITER now pairs
 against Ombak Lock, Antemelos, Aliquoto and Desiderata; Numinous Drift and Close Harmony

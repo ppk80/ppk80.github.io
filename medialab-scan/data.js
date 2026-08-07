@@ -22,7 +22,9 @@ export const mine = {
   antemelos: { name: "Antemelos", year: "2025", url: "https://xyhtamura.github.io/antemelos/", blurb: "A melody generator that works in raw frequencies rather than in any scale, so it produces pitches that fall between the notes of a keyboard." },
   gliese: { name: "Gliese", year: "2026", url: "https://xyhtamura.github.io/gliese/", blurb: "A reverb and delay built by tracing sound rays through air, the way light is traced through glass, instead of using the usual approximations." },
   metachamber: { name: "Metachamber", year: "2026", url: "https://xyhtamura.github.io/hindcasts/metachamber/", blurb: "A reverb that looks ahead for the silences in a recording and fits each tail to the gap it has to die in, instead of applying one fixed decay throughout." },
-  hindcasts: { name: "Hindcasts", year: "2026", url: "https://xyhtamura.github.io/hindcasts/", blurb: "Audio and video effects that read the whole recording before they start. Because they know what is coming, they can react before an event happens, or run time backwards." },
+  hindcasts: { name: "Hindcasts", year: "2026", url: "https://xyhtamura.github.io/hindcasts/", blurb: "Audio and video effects that read the whole recording before they start. Because they know what is coming, they can react before an event happens, or run time backwards. Built because the work needed it, not as a piece in itself." },
+  cornerfit: { name: "cornerfit", year: "2026", url: "https://xyhtamura.github.io/cornerfit/", blurb: "A small web utility that fits content correctly inside a container with rounded corners, which browsers do not do on their own." },
+  stitcher: { name: "stitcher", year: "2025", url: "https://xyhtamura.github.io/stitcher/", blurb: "A web and desktop application that merges many files into one text document." },
   cytophone: { name: "Cytophone", year: "2026", url: "https://xyhtamura.github.io/cytophone/", blurb: "Seven instruments that make sound from biological processes — cell activity, plant pores, tissue movement." },
   kikik: { name: "kíkik", year: "2026", blurb: "Listens to a recording for the moments a sound starts, then uses those moments to seed a swarm that moves like a colony of small organisms, and lets the swarm trigger sound back. The link on the portfolio index is currently dead." },
   benzaiten: { name: "Benzaiten", year: "2026", url: "https://xyhtamura.github.io/benzaiten/", blurb: "A video synthesizer whose image is a live simulation of moving fluid and magnetic fields, running on the graphics card and steered by touch and sound." },
@@ -55,6 +57,7 @@ export const mine = {
   hauntotechnics: { name: "Hauntotechnics", year: "2026", url: "https://www.artemresearchcollective.com/zine", blurb: "An essay putting Derrida's idea of haunting together with Yuk Hui's argument that technology is culturally specific, to ask how being haunted is mediated differently in different places." },
   dungeonsynth: { name: "Dungeon Synth as Transcultural and Transtemporal Construction", year: "2026", url: "https://www.researchgate.net/publication/401526519_Dungeon_Synth_as_Transcultural_and_Transtemporal_Construction_Synthetic_Medievalisms", blurb: "A conference paper on a music genre that reconstructs a medieval past that never existed, using synthesizers — a reconstruction of a reconstruction." },
   interiority: { name: "From Interiority to Interaction", year: "2025", url: "https://journals.ub.uni-koeln.de/index.php/phidi/article/view/11659", blurb: "A published paper asking what counts as a person when the other party is a machine, using Japanese practices around robots and dolls to reframe the question." },
+  feelingtogether: { name: "Feeling Together: Affective Circuits and the Relational Self in Philippine Cultures", year: "2025", url: "https://www.researchgate.net/publication/393630709_Feeling_Together_Affective_Circuits_and_the_Relational_Self_in_Philippine_Cultures_Beyond_Literary_Individualism", blurb: "A conference paper arguing that in the Philippine cultures it examines, feeling is not something sealed inside one person and then expressed outward. It runs as a circuit between people, which means a self is constituted relationally rather than individually." },
   navivi: { name: "Navivi", year: "2026", blurb: "A plush robot companion with a screen for a face, built on a Raspberry Pi with removable electronics. With Mithi Sevilla. Unpublished." },
   toys: { name: "The ~50 browser projects", year: "2024–2026", url: "https://xyhtamura.github.io/", blurb: "The whole shelf: around fifty self-contained web pages, each one a tool, instrument or toy, all of them running with no server and no installation." },
   physics: { name: "BS Physics, then instruments", year: "2007–", blurb: "A physics degree from the theoretical group at UP Diliman, followed by fifteen years of building sound instruments — and an ongoing folder of open physics and mathematics questions raised by that building." }
@@ -163,6 +166,33 @@ export const groups = [
     axis: "How Xyh does research",
     people: [
       { name: "Deb Roy", url: "https://en.wikipedia.org/wiki/Deb_Roy", role: "Professor of Media Arts and Sciences; directs the centre. Previously founded Bluefin Labs, later acquired by Twitter; co-founded and chairs Cortico, the nonprofit that runs the Local Voices Network.", extra: [{ label: "At the Media Lab", url: "https://www.media.mit.edu/people/dkroy/overview/" }, { label: "Cortico", url: "https://cortico.ai/" }, { label: "Local Voices Network", url: "https://www.media.mit.edu/projects/local-voices-network/overview/" }] }
+    ]
+  },
+  {
+    id: "affective-computing", name: "Affective Computing", lab: "MIT Media Lab", pi: "Rosalind W. Picard",
+    url: "https://www.media.mit.edu/groups/affective-computing/overview/",
+    mission: "Advancing human wellbeing by developing new ways to communicate, understand, and respond to emotion.",
+    plain: "The group that named this field. It builds sensors and software that read emotional and physiological signals off a person — heart rate, skin response, expression, sleep — and puts them to work on mental health, epilepsy, depression prevention and social robots.",
+    axis: "What Xyh argues",
+    people: [
+      { name: "Rosalind W. Picard", url: "https://en.wikipedia.org/wiki/Rosalind_Picard", role: "Grover M. Hermann Professor in Health Sciences and Technology, and Professor of Media Arts and Sciences. Her 1997 book gave affective computing its name." },
+      { name: "Szymon Fedor", role: "Research scientist." },
+      { name: "Robert Stickgold", role: "Visiting professor; sleep and memory." },
+      { name: "Katherine Matton, Noah Jones, Robert Lewis, Jae In Yoo, Nelson Hidalgo, Boyu Zhang", role: "Graduate students. Eighteen people are listed in total, making this one of the largest groups in this survey." }
+    ]
+  },
+  {
+    id: "viral-communications", name: "Viral Communications", lab: "MIT Media Lab", pi: "Andrew Lippman",
+    url: "https://www.media.mit.edu/groups/viral-communications/overview/",
+    mission: "People and intelligent machines in a creative loop.",
+    plain: "A group building what it calls technologies of curiosity: systems meant to prompt exploration rather than deliver answers. Much of the current work is about giving people control back over the algorithms and platforms they use — breaking applications out of their silos, and running AI on your own device so your data stays there.",
+    axis: "How Xyh works",
+    people: [
+      { name: "Andrew Lippman", role: "Senior Research Scientist. Has been at the Media Lab since it opened." },
+      { name: "Kevin Dunnell", role: "Graduate student." },
+      { name: "Mike Hao Jiang", role: "Graduate student." },
+      { name: "Irura Nyiha", role: "Graduate student." },
+      { name: "Tawab Safi", role: "Graduate student." }
     ]
   }
 ];
@@ -373,5 +403,32 @@ export const collisions = [
     headline: "A group whose stated method is going back to old computing to find unused futures",
     note: "The group describes its sketches as a way of engaging with the past to suggest different possible futures. In practice: rebuilding a 1970s interactive map as a modern 3D scan, restoring John Maeda's 1999 programming environment in JavaScript, running live webcam feeds through a video synthesizer design from the 1970s, turning visitors into text characters. That is the same operation as W2XDX's invented television standard, Cornice and Deskarium drawn in text characters, KuboCities in 1990s web style, and the dungeon synth paper on a genre that reconstructs a medieval past that never happened.",
     also: null
+  },
+  {
+    id: "hindcasts-toolkits", featured: false, group: "future-sketches",
+    mine: ["hindcasts", "cornerfit", "stitcher"],
+    them: "openFrameworks, Dither, FrameGrabber, Srcsnap",
+    who: "Zach Lieberman, Theo Watson and Arturo Castro; Lingdong Huang",
+    src: [
+      { label: "openFrameworks", url: "https://openframeworks.cc/about/" },
+      { label: "Its history", url: "https://en.wikipedia.org/wiki/OpenFrameworks" },
+      { label: "Future Sketches", url: "https://www.media.mit.edu/groups/future-sketches/overview/" }
+    ],
+    headline: "Tools built because something needed doing, counted as research rather than overhead",
+    note: "Future Sketches states its purpose in two halves. The first is code as a medium. The second is toolkits — how they, and the way they are taught, shape what a generation of people can make. openFrameworks came out of exactly that: Lieberman was teaching at Parsons, needed building blocks for artists working in code, and released the first version in August 2005. He describes it plainly as a set of tools you can build with. It is indebted to Processing and to the ACU Toolkit, a privately circulated library from the Media Lab's own Aesthetics and Computation Group, so the lineage runs back into this building.",
+    also: "Hindcasts, cornerfit and stitcher are the same kind of object — made because the work required them, not as pieces in themselves. Worth knowing that a research group at MIT treats that category as an output rather than as the unglamorous part. Lingdong Huang's Dither, and the group's small utilities for grabbing animation frames and tracking design versions, sit in the same column."
+  },
+  {
+    id: "feelingtogether-affect", featured: false, group: "affective-computing",
+    mine: ["feelingtogether", "interiority", "istorya"],
+    them: "Affective Computing, and the Center for Constructive Communication",
+    who: "Rosalind W. Picard, and Deb Roy's centre",
+    src: [
+      { label: "Affective Computing", url: "https://www.media.mit.edu/groups/affective-computing/overview/" },
+      { label: "Viral Communications", url: "https://www.media.mit.edu/groups/viral-communications/overview/" }
+    ],
+    headline: "A disagreement about where a feeling is located",
+    note: "Affective Computing reads emotion off an individual body: heart rate, skin response, facial expression, sleep. The person is the unit, and the feeling is a state inside them that instruments can reach. Feeling Together argues that in the Philippine cultures it examines, feeling is not sealed inside one person and then expressed outward — it runs as a circuit between people, which makes the self relational rather than individual. Those are two different answers to a real question, and the second one is not currently represented at the Lab.",
+    also: "The Center for Constructive Communication is the closer structural fit: it already treats understanding as something produced between people in a facilitated conversation, which is the model the paper argues for, and it is the group whose method most resembles Istorya sang Bȧlatyagon. Viral Communications is a looser match, though its insistence on keeping your data and your algorithms on your own device rhymes with how Xyh builds."
   }
 ];
